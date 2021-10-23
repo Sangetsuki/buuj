@@ -518,10 +518,10 @@ _080007B6:
 	ands r6, r1
 	strb r6, [r7, #9]
 	ldr r1, _080008F4 @ =0x05000200
-	ldr r0, _080008F8 @ =0x0800378C = pokeballs pal
+	ldr r0, _080008F8 @ =pokeballsPalette
 	movs r2, #0x10
 	bl CpuSet
-	ldr r0, _080008FC @ =grayBall = gray pokeball
+	ldr r0, _080008FC @ =grayBall
 	ldr r1, _08000900 @ =0x06014000
 	movs r2, #0xa0
 	lsls r2, r2, #1
@@ -546,7 +546,7 @@ _080008E8: .4byte 0x0800350C
 _080008EC: .4byte 0xFFFFFE00
 _080008F0: .4byte 0xFFFFFC00
 _080008F4: .4byte 0x05000200
-_080008F8: .4byte 0x0800378C
+_080008F8: .4byte pokeballsPalette
 _080008FC: .4byte grayBall
 _08000900: .4byte 0x06014000
 
@@ -2836,7 +2836,7 @@ _08001C64: .4byte 0x03000258
 
 	thumb_func_start sub_8001C68
 sub_8001C68: @ 0x08001C68
-	ldr r1, _08001C7C @ =0x040000D4
+	ldr r1, _08001C7C @ =REG_DMA3SAD_L
 	ldr r0, _08001C80 @ =0x03000258
 	str r0, [r1]
 	movs r0, #0xc0
@@ -2847,7 +2847,7 @@ sub_8001C68: @ 0x08001C68
 	ldr r0, [r1, #8]
 	bx lr
 	.align 2, 0
-_08001C7C: .4byte 0x040000D4
+_08001C7C: .4byte REG_DMA3SAD_L
 _08001C80: .4byte 0x03000258
 _08001C84: .4byte 0x84000200
 

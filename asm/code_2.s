@@ -1,20 +1,6 @@
 	.include "asm/macro.inc"
 	.syntax unified
-	
-	thumb_func_start sub_800274C
-sub_800274C: @ 0x0800274C
-	push {r7, lr}
-	mov r7, sp
-	bl sub_8002FEC
-	ldr r0, _08002760 @ =0x03000A62
-	movs r1, #0
-	strb r1, [r0]
-	pop {r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-	
-_08002760: .4byte 0x03000A62
+
 _08002764:
 	.byte 0x80, 0xB5, 0x6F, 0x46, 0x00, 0xF0, 0x4A, 0xFC, 0x02, 0x48, 0x01, 0x21
 	.byte 0x01, 0x70, 0x80, 0xBC, 0x01, 0xBC, 0x00, 0x47, 0x62, 0x0A, 0x00, 0x03
@@ -927,29 +913,3 @@ _08002FE4:
 	pop {r7}
 	pop {r1}
 	bx r1
-
-	thumb_func_start sub_8002FEC
-sub_8002FEC: @ 0x08002FEC
-	push {r7, lr}
-	mov r7, sp
-	ldr r0, _08002FFC @ =0x080000C8
-	movs r1, #1
-	strh r1, [r0]
-	pop {r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002FFC: .4byte 0x080000C8
-
-	thumb_func_start sub_8003000
-sub_8003000: @ 0x08003000
-	push {r7, lr}
-	mov r7, sp
-	ldr r0, _08003010 @ =0x080000C8
-	movs r1, #0
-	strh r1, [r0]
-	pop {r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08003010: .4byte 0x080000C8

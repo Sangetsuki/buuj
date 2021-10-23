@@ -73,6 +73,8 @@ $(ROM): $(ELF)
 $(ELF): $(ALL_OBJS) $(LDSCRIPT) libagbsyscall
 	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) -o ../$@ $(LIB)
 
+include unoptimized.mk
+
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	$(CC1) $(CFLAGS) $(C_BUILDDIR)/$*.i -o $(C_BUILDDIR)/$*.s
