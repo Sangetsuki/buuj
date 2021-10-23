@@ -521,7 +521,7 @@ _080007B6:
 	ldr r0, _080008F8 @ =0x0800378C = pokeballs pal
 	movs r2, #0x10
 	bl CpuSet
-	ldr r0, _080008FC @ =0x080037AC = gray pokeball
+	ldr r0, _080008FC @ =grayBall = gray pokeball
 	ldr r1, _08000900 @ =0x06014000
 	movs r2, #0xa0
 	lsls r2, r2, #1
@@ -547,7 +547,7 @@ _080008EC: .4byte 0xFFFFFE00
 _080008F0: .4byte 0xFFFFFC00
 _080008F4: .4byte 0x05000200
 _080008F8: .4byte 0x0800378C
-_080008FC: .4byte 0x080037AC
+_080008FC: .4byte grayBall
 _08000900: .4byte 0x06014000
 
 	thumb_func_start sub_8000904

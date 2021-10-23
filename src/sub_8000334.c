@@ -2,7 +2,7 @@
 
 void sub_8000334()
 {
-	return;
+
 }
 
 void sub_8000338()
