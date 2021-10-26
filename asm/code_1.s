@@ -722,7 +722,7 @@ _08000A58:
 _08000A60: .4byte 0x02000004
 
 	thumb_func_start ReadKeys
-ReadKeys: @ 0x08000A64
+ReadKeys: @ 0x08000A64, this function is very similar to the berry fix one, so why not?
 	push {r4, lr}
 	ldr r0, _08000A84 @ =0x04000130
 	ldrh r0, [r0]
@@ -1445,8 +1445,8 @@ _080010C0:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_80010CC
-sub_80010CC: @ 0x080010CC AgbMain?
+	thumb_func_start AgbMain
+AgbMain: @ 0x080010CC
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	bl sub_80015DC
