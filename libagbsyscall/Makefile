@@ -54,8 +54,8 @@ SYSCALLS := VBlankIntrWait \
             MultiBoot \
             Div \
             SoftResetRom \
-            CpuSet #\
-#            DivRem
+            CpuSet \
+            DivRem #\
 
 ASM_SRCS := libagbsyscall.s
 ASM_OBJS := $(foreach syscall, $(SYSCALLS), $(syscall).o)

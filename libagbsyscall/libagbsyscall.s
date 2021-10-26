@@ -383,6 +383,15 @@ CpuSet:
 	thumb_func_end CpuSet
 	.endif
 
+	.ifdef L_DivRem
+	thumb_func_start DivRem
+DivRem:
+	svc #6
+	add r0, r1, #0
+	bx lr
+	thumb_func_end DivRem
+	.endif
+
 	.ifdef L_Diff16bitUnFilter
 	thumb_func_start Diff16bitUnFilter
 Diff16bitUnFilter:

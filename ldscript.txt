@@ -12,7 +12,7 @@ SECTIONS
         asm/code_1.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
         *libagbsyscall.a:Div.o(.text);
-        asm/DivRem.o(.text); /* *libagbsyscall.a:DivRem.o */
+        *libagbsyscall.a:DivRem.o(.text);
         *libagbsyscall.a:MultiBoot.o(.text);
         *libagbsyscall.a:SoftResetRom.o(.text);
         *libagbsyscall.a:VBlankIntrWait.o(.text);
