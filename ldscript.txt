@@ -2,6 +2,10 @@ OUTPUT_ARCH(arm)
 
 SECTIONS
 {
+
+    gNewKeys = 0x03000B0C;
+    gHeldKeys = 0x03000AAC;
+
     . = 0x08000000;
     .text :
     ALIGN(4)
@@ -10,6 +14,8 @@ SECTIONS
         asm/sub_80001D4.o(.text);
         src/sub_8000334.o(.text);
         asm/code_1.o(.text);
+        src/ReadKeys.o(.text);
+        asm/code_1_2.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
         *libagbsyscall.a:Div.o(.text);
         *libagbsyscall.a:DivRem.o(.text);
