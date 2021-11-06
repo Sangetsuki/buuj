@@ -16,6 +16,5 @@
 tools/agbcc
 build/
 *.dump
-graphics/
 .vscode/
 *.a

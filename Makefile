@@ -35,7 +35,7 @@ BUILD_DIR = build
 C_BUILDDIR = $(BUILD_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(BUILD_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(BUILD_DIR)/$(DATA_ASM_SUBDIR)
-
+TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 
 #### Files/Directories ####
 
@@ -61,19 +61,19 @@ SUBDIRS := $(sort $(dir $(ALL_OBJS)))
 LIBPATH := -L../tools/agbcc/lib
 LIB := $(LIBPATH) -lgcc -lc -L../libagbsyscall -lagbsyscall
 
-FIX := tools/gbafix/gbafix$(EXE)
-
+GFX  := tools/gbagfx/gbagfx$(EXE)
 
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
 
+include unoptimized.mk
+include graphics.mk
+
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary  $< $@
 
-$(ELF): $(ALL_OBJS) $(LDSCRIPT) libagbsyscall
+$(ELF): $(ALL_OBJS) $(LDSCRIPT) libagbsyscall/libagbsyscall.a 
 	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) -o ../$@ $(LIB)
-
-include unoptimized.mk
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
@@ -84,18 +84,19 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s graphics
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
 	rm -f $(ROM) $(ELF) $(MAP) 
 	rm -r $(BUILD_DIR)/
-	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) clean
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	$(MAKE) clean -C libagbsyscall
 
 compare: $(ROM)
 	sha1sum -c $(BUILD_NAME).sha1
 
-libagbsyscall:
+libagbsyscall/libagbsyscall.a:
 	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 	
 SYMTAB := poke$(BUILD_NAME)_syms.dump
@@ -105,4 +106,4 @@ symtab: $(SYMTAB)
 $(SYMTAB): $(ELF)
 	$(DEVKITARM)/bin/arm-none-eabi-nm $< | uniq > $@
 
-.PHONY: libagbsyscall
+.PHONY: $(TOOLDIRS)
