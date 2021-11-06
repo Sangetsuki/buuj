@@ -90,6 +90,7 @@ $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
 clean:
 	rm -f $(ROM) $(ELF) $(MAP) 
 	rm -r $(BUILD_DIR)/
+	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) clean
 
 compare: $(ROM)
 	sha1sum -c $(BUILD_NAME).sha1
@@ -103,3 +104,5 @@ symtab: $(SYMTAB)
 
 $(SYMTAB): $(ELF)
 	$(DEVKITARM)/bin/arm-none-eabi-nm $< | uniq > $@
+
+.PHONY: libagbsyscall

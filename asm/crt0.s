@@ -1,10 +1,12 @@
 	.include "constants/gba_constants.inc"
 
+	.global Start
 Start: @ 0x08000000
 	b Init
 	
    .include "asm/rom_header.inc"
    
+   .global Init
 Init:
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_fc, r0
@@ -39,5 +41,4 @@ _080000FC:
 	.byte 0x00, 0x00, 0x91, 0xE5, 0x10, 0xFF, 0x2F, 0xE1
 _080001C8: .4byte INTR_VECTOR
 _080001CC: .4byte AgbMain
-_080001D0:
-	.byte 0x70, 0x0A, 0x00, 0x03
+_080001D0: .4byte 0x03000A70

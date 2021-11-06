@@ -21,7 +21,7 @@ void sub_8000338()
         ((u32*)EWRAM_START)[i + 1] = 0;
 }
 
-void sub_8000378()
+void sub_8000378(void)
 {
 	u32* ewramStart = (u32*)EWRAM_START;
 	if (*ewramStart != 0x7ED7F420)
