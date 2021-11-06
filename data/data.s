@@ -8,10 +8,10 @@ data:
 pokeballsPalette:
 	.incbin "graphics/big_pokeball.gbapal"
 
-	.global grayBall
-grayBall:
-	.incbin "graphics/big_pokeball.4bpp"
+	.global pokeballs
+pokeballs:
+	.incbin "graphics/pokeballs.4bpp"
 
 	.global data2
 data2:
-	.incbin "baserom.gba", 0x39AC, 0x3FC654
+	.incbin "baserom.gba", 0x3A2C, 0x3FC5D4

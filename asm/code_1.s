@@ -355,7 +355,7 @@ _08000768: .4byte 0x0400000C
 _0800076C: .4byte 0x00001443
 
 	thumb_func_start sub_8000770
-sub_8000770: @ 0x08000770 this function creates the gray pokeball icon
+sub_8000770: @ 0x08000770 this function creates both pokeballs icons
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -521,7 +521,7 @@ _080007B6:
 	ldr r0, _080008F8 @ =pokeballsPalette
 	movs r2, #0x10
 	bl CpuSet
-	ldr r0, _080008FC @ =grayBall
+	ldr r0, _080008FC @ =pokeballs
 	ldr r1, _08000900 @ =0x06014000
 	movs r2, #0xa0
 	lsls r2, r2, #1
@@ -547,7 +547,7 @@ _080008EC: .4byte 0xFFFFFE00
 _080008F0: .4byte 0xFFFFFC00
 _080008F4: .4byte 0x05000200
 _080008F8: .4byte pokeballsPalette
-_080008FC: .4byte grayBall
+_080008FC: .4byte pokeballs
 _08000900: .4byte 0x06014000
 
 	thumb_func_start sub_8000904
