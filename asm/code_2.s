@@ -123,16 +123,16 @@ sub_8002854: @ 0x08002854
 	push {r7, lr}
 	sub sp, #0x10
 	mov r7, sp
-	ldr r0, _08002868 @ =0x03000A62
+	ldr r0, _08002868 @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _0800286C
 	movs r0, #0
 	b _080028D0
 	.align 2, 0
-_08002868: .4byte 0x03000A62
+_08002868: .4byte isGPIOPortDisabled
 _0800286C:
-	ldr r0, _080028C4 @ =0x03000A62
+	ldr r0, _080028C4 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _080028C8 @ =0x080000C4
@@ -152,7 +152,7 @@ _0800286C:
 	ldr r0, _080028C8 @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _080028C4 @ =0x03000A62
+	ldr r0, _080028C4 @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	adds r0, r7, #4
@@ -175,7 +175,7 @@ _0800286C:
 	adds r0, r1, #0
 	b _080028D0
 	.align 2, 0
-_080028C4: .4byte 0x03000A62
+_080028C4: .4byte isGPIOPortDisabled
 _080028C8: .4byte 0x080000C4
 _080028CC: .4byte 0x080000C6
 _080028D0:
@@ -190,16 +190,16 @@ sub_80028D8: @ 0x080028D8
 	sub sp, #8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, _080028EC @ =0x03000A62
+	ldr r0, _080028EC @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _080028F0
 	movs r0, #0
 	b _0800299C
 	.align 2, 0
-_080028EC: .4byte 0x03000A62
+_080028EC: .4byte isGPIOPortDisabled
 _080028F0:
-	ldr r0, _08002990 @ =0x03000A62
+	ldr r0, _08002990 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _08002994 @ =0x080000C4
@@ -272,13 +272,13 @@ _080028F0:
 	ldr r0, _08002994 @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _08002990 @ =0x03000A62
+	ldr r0, _08002990 @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #1
 	b _0800299C
 	.align 2, 0
-_08002990: .4byte 0x03000A62
+_08002990: .4byte isGPIOPortDisabled
 _08002994: .4byte 0x080000C4
 _08002998: .4byte 0x080000C6
 _0800299C:
@@ -293,16 +293,16 @@ sub_80029A4: @ 0x080029A4
 	sub sp, #8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, _080029B8 @ =0x03000A62
+	ldr r0, _080029B8 @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _080029BC
 	movs r0, #0
 	b _08002A44
 	.align 2, 0
-_080029B8: .4byte 0x03000A62
+_080029B8: .4byte isGPIOPortDisabled
 _080029BC:
-	ldr r0, _08002A38 @ =0x03000A62
+	ldr r0, _08002A38 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _08002A3C @ =0x080000C4
@@ -356,13 +356,13 @@ _080029BC:
 	ldr r0, _08002A3C @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _08002A38 @ =0x03000A62
+	ldr r0, _08002A38 @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #1
 	b _08002A44
 	.align 2, 0
-_08002A38: .4byte 0x03000A62
+_08002A38: .4byte isGPIOPortDisabled
 _08002A3C: .4byte 0x080000C4
 _08002A40: .4byte 0x080000C6
 _08002A44:
@@ -377,16 +377,16 @@ sub_8002A4C: @ 0x08002A4C
 	sub sp, #8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, _08002A60 @ =0x03000A62
+	ldr r0, _08002A60 @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _08002A64
 	movs r0, #0
 	b _08002AF4
 	.align 2, 0
-_08002A60: .4byte 0x03000A62
+_08002A60: .4byte isGPIOPortDisabled
 _08002A64:
-	ldr r0, _08002A98 @ =0x03000A62
+	ldr r0, _08002A98 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _08002A9C @ =0x080000C4
@@ -413,7 +413,7 @@ _08002A8E:
 	bls _08002AA4
 	b _08002AC2
 	.align 2, 0
-_08002A98: .4byte 0x03000A62
+_08002A98: .4byte isGPIOPortDisabled
 _08002A9C: .4byte 0x080000C4
 _08002AA0: .4byte 0x080000C6
 _08002AA4:
@@ -448,14 +448,14 @@ _08002AC2:
 	ldr r0, _08002AEC @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _08002AF0 @ =0x03000A62
+	ldr r0, _08002AF0 @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #1
 	b _08002AF4
 	.align 2, 0
 _08002AEC: .4byte 0x080000C4
-_08002AF0: .4byte 0x03000A62
+_08002AF0: .4byte isGPIOPortDisabled
 _08002AF4:
 	add sp, #8
 	pop {r7}
@@ -468,16 +468,16 @@ sub_8002AFC: @ 0x08002AFC
 	sub sp, #8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, _08002B10 @ =0x03000A62
+	ldr r0, _08002B10 @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _08002B14
 	movs r0, #0
 	b _08002B90
 	.align 2, 0
-_08002B10: .4byte 0x03000A62
+_08002B10: .4byte isGPIOPortDisabled
 _08002B14:
-	ldr r0, _08002B44 @ =0x03000A62
+	ldr r0, _08002B44 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _08002B48 @ =0x080000C4
@@ -501,7 +501,7 @@ _08002B38:
 	bls _08002B50
 	b _08002B70
 	.align 2, 0
-_08002B44: .4byte 0x03000A62
+_08002B44: .4byte isGPIOPortDisabled
 _08002B48: .4byte 0x080000C4
 _08002B4C: .4byte 0x080000C6
 _08002B50:
@@ -527,14 +527,14 @@ _08002B70:
 	ldr r0, _08002B88 @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _08002B8C @ =0x03000A62
+	ldr r0, _08002B8C @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #1
 	b _08002B90
 	.align 2, 0
 _08002B88: .4byte 0x080000C4
-_08002B8C: .4byte 0x03000A62
+_08002B8C: .4byte isGPIOPortDisabled
 _08002B90:
 	add sp, #8
 	pop {r7}
@@ -547,16 +547,16 @@ sub_8002B98: @ 0x08002B98
 	sub sp, #8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, _08002BAC @ =0x03000A62
+	ldr r0, _08002BAC @ =isGPIOPortDisabled
 	ldrb r1, [r0]
 	cmp r1, #1
 	bne _08002BB0
 	movs r0, #0
 	b _08002C44
 	.align 2, 0
-_08002BAC: .4byte 0x03000A62
+_08002BAC: .4byte isGPIOPortDisabled
 _08002BB0:
-	ldr r0, _08002BE4 @ =0x03000A62
+	ldr r0, _08002BE4 @ =isGPIOPortDisabled
 	movs r1, #1
 	strb r1, [r0]
 	ldr r0, _08002BE8 @ =0x080000C4
@@ -583,7 +583,7 @@ _08002BDA:
 	bls _08002BF0
 	b _08002C10
 	.align 2, 0
-_08002BE4: .4byte 0x03000A62
+_08002BE4: .4byte isGPIOPortDisabled
 _08002BE8: .4byte 0x080000C4
 _08002BEC: .4byte 0x080000C6
 _08002BF0:
@@ -619,14 +619,14 @@ _08002C10:
 	ldr r0, _08002C3C @ =0x080000C4
 	movs r1, #1
 	strh r1, [r0]
-	ldr r0, _08002C40 @ =0x03000A62
+	ldr r0, _08002C40 @ =isGPIOPortDisabled
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #1
 	b _08002C44
 	.align 2, 0
 _08002C3C: .4byte 0x080000C4
-_08002C40: .4byte 0x03000A62
+_08002C40: .4byte isGPIOPortDisabled
 _08002C44:
 	add sp, #8
 	pop {r7}

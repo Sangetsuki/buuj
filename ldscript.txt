@@ -5,6 +5,7 @@ SECTIONS
 
     gNewKeys = 0x03000B0C;
     gHeldKeys = 0x03000AAC;
+    isGPIOPortDisabled = 0x03000A62;
 
     . = 0x08000000;
     .text :
