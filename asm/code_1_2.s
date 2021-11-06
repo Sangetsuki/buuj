@@ -580,7 +580,7 @@ _08000FC2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000FD0: .4byte 0x08008A74
+_08000FD0: .4byte 0x08008A74 // pokemon name table
 
 	thumb_func_start sub_8000FD4
 sub_8000FD4: @ 0x08000FD4
