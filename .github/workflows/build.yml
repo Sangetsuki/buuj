@@ -24,4 +24,4 @@ jobs:
       working-directory: agbcc
 
     - name: Compare
-        run: make -j${nproc} compare
+      run: make compare
