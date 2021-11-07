@@ -669,15 +669,15 @@ _080009B6:
 	str r0, [sp]
 	adds r0, r3, #0
 	movs r3, #4
-	bl sub_8002124
+	bl MultiBootStartMaster
 _080009F4:
 	ldr r4, _08000A20 @ =0x03000AC0
 	adds r0, r4, #0
-	bl sub_8001CC4
+	bl MultiBootMain
 	ldr r1, _08000A2C @ =0x03000AA8
 	str r0, [r1]
 	adds r0, r4, #0
-	bl sub_80021E8
+	bl MultiBootCheckComplete
 	cmp r0, #0
 	bne _08000A34
 	ldr r0, _08000A30 @ =0x03000AAC
@@ -710,7 +710,7 @@ _08000A34:
 	adds r0, #1
 	str r0, [r2, #0x2c]
 	adds r0, r4, #0
-	bl sub_8001C88
+	bl MultiBootInit
 _08000A56:
 	movs r0, #1
 _08000A58:

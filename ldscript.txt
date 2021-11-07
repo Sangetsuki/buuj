@@ -5,6 +5,7 @@ SECTIONS
 
     gNewKeys = 0x03000B0C;
     gHeldKeys = 0x03000AAC;
+    MultiBoot_required_data = 0x03000A58;
     isGPIOPortDisabled = 0x03000A62;
 
     . = 0x08000000;
@@ -17,6 +18,8 @@ SECTIONS
         asm/code_1.o(.text);
         src/ReadKeys.o(.text);
         asm/code_1_2.o(.text);
+        src/multiboot.o(.text);
+        asm/after_multiboot.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
         *libagbsyscall.a:Div.o(.text);
         *libagbsyscall.a:DivRem.o(.text);
@@ -36,7 +39,7 @@ SECTIONS
         *libgcc.a:_umodsi3.o*(.text);
         */
     } = 0
-    
+
 	.rodata :
 	ALIGN(4)
 	{
