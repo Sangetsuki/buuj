@@ -26,7 +26,6 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -I include -iquote include -Wn
 CFLAGS   := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 ASFLAGS  := -mcpu=arm7tdmi
 
-
 C_SUBDIR = src
 ASM_SUBDIR = asm
 DATA_ASM_SUBDIR = data
@@ -66,6 +65,8 @@ GFX  := tools/gbagfx/gbagfx$(EXE)
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
 
+all: $(ROM)
+
 include unoptimized.mk
 include graphics.mk
 
@@ -99,11 +100,11 @@ compare: $(ROM)
 libagbsyscall/libagbsyscall.a:
 	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
 	
-SYMTAB := poke$(BUILD_NAME)_syms.dump
+SYMTAB := $(BUILD_NAME)_syms.dump
 
 symtab: $(SYMTAB)
 
 $(SYMTAB): $(ELF)
 	$(DEVKITARM)/bin/arm-none-eabi-nm $< | uniq > $@
 
-.PHONY: $(TOOLDIRS)
+.PHONY: compare all clean
