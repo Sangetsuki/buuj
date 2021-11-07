@@ -1,7 +1,12 @@
 #include "gba/gba.h"
 #include "multiboot.h"
 
-extern u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
+// to help in decompiling
+#define asm_comment(x) asm volatile("@ -- " x " -- ")
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+#define NAKED __attribute__((naked))
+
+extern EWRAM_DATA u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
 
 static int MultiBootSend(struct MultiBootParam *mp, u16 data);
 static int MultiBootHandShake(struct MultiBootParam *mp);
@@ -318,7 +323,7 @@ void MultiBootStartProbe(struct MultiBootParam *mp)
 
 void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length, u8 palette_color, s8 palette_speed)
 {
-    int i = 0;
+    int i;
 
     if (mp->probe_count != 0
      || mp->client_bit == 0
@@ -434,9 +439,6 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 #undef send_data
 #undef must_data
 }
-
-#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
-#define NAKED __attribute__((naked))
 
 NAKED
 static void MultiBootWaitCycles(u32 cycles)
