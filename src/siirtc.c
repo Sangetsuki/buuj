@@ -63,13 +63,13 @@ static void DisableGpioPortRead();
 
 void SiiRtcUnprotect()
 {
-    GPIOPortReadEnable();
+    EnableGpioPortRead();
     sLocked = FALSE;
 }
 
-void DisableGpioPortRead()
+void SiiRtcProtect()
 {
-    GPIOPortReadDisable();
+    DisableGpioPortRead();
     sLocked = TRUE;
 }
 
@@ -419,12 +419,12 @@ static u8 ReadData()
     return value;
 }
 
-void GPIOPortReadEnable() // 0x08002FEC
+static void EnableGpioPortRead()
 {
     GPIO_PORT_READ_ENABLE = 1;
 }
 
-void GPIOPortReadDisable() // 0x08003000
+static void DisableGpioPortRead()
 {
-    GPIO_PORT_READ_ENABLE = 0;   
+    GPIO_PORT_READ_ENABLE = 0;
 }

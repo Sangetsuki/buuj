@@ -1,11 +1,9 @@
 #include "gba/gba.h"
 
-void sub_8000334()
-{
+void sub_8000334(void)
+{}
 
-}
-
-void sub_8000338()
+void sub_8000338(void)
 {
     int i;
     u32* ewramStart = (u32*)EWRAM_START;
