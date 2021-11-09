@@ -17,7 +17,8 @@ SECTIONS
         src/sub_8000334.o(.text);
         asm/code_1.o(.text);
         src/ReadKeys.o(.text);
-        asm/code_1_2.o(.text);
+        asm/code_2.o(.text);
+        asm/rtc.o(.text);
         src/multiboot.o(.text);
         asm/after_multiboot.o(.text);
         *libagbsyscall.a:CpuSet.o(.text);
