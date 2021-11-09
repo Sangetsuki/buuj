@@ -1,4 +1,4 @@
-	.include "asm/macro.inc"
+	.include "asm/macros/function.inc"
 	.syntax unified
 
 	thumb_func_start __udivsi3
