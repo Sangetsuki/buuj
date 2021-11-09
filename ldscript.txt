@@ -26,7 +26,7 @@ SECTIONS
         *libagbsyscall.a:MultiBoot.o(.text);
         *libagbsyscall.a:SoftResetRom.o(.text);
         *libagbsyscall.a:VBlankIntrWait.o(.text);
-        src/sub_800274C.o(.text);
+        src/siirtc.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divsi3.o(.text);
         *libgcc.a:_dvmd_tls.o(.text);
