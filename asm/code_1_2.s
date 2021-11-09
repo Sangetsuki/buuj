@@ -1291,8 +1291,8 @@ sub_80015DC: @ 0x080015DC
 	movs r0, #0
 	strh r0, [r5]
 	bl sub_8001588
-	bl sub_800274C
-	bl sub_800277C
+	bl SiiRtcUnprotect
+	bl SiiRtcProbe
 	ldr r4, _0800160C @ =0x03000254
 	strb r0, [r4]
 	bl sub_80015A0
@@ -1352,7 +1352,7 @@ sub_8001680: @ 0x08001680
 	adds r4, r0, #0
 	bl sub_8001588
 	adds r0, r4, #0
-	bl sub_8002A4C
+	bl SiiRtcGetDateTime
 	bl sub_80015A0
 	pop {r4}
 	pop {r0}
@@ -1364,7 +1364,7 @@ sub_8001698: @ 0x08001698
 	adds r4, r0, #0
 	bl sub_8001588
 	adds r0, r4, #0
-	bl sub_80028D8
+	bl SiiRtcGetStatus
 	bl sub_80015A0
 	pop {r4}
 	pop {r0}
@@ -1387,7 +1387,7 @@ sub_80016C4: @ 0x080016C4
 	adds r4, r0, #0
 	bl sub_8001588
 	adds r0, r4, #0
-	bl sub_8002AFC
+	bl SiiRtcSetDateTime
 	bl sub_80015A0
 	pop {r4}
 	pop {r0}
@@ -1520,7 +1520,7 @@ _080017C0: .4byte 0x08003A38
 sub_80017C4: @ 0x080017D8
 	push {lr}
 	bl sub_8001588
-	bl sub_8002854
+	bl SiiRtcReset
 	bl sub_80015A0
 	pop {r0}
 	bx r0
