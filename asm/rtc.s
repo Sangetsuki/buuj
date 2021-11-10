@@ -6,7 +6,7 @@
 	thumb_func_start rtc_probe_status
 rtc_probe_status: @ 0x080015DC
 	push {r4, r5, lr}
-	ldr r5, _08001608 @ =0x03000240
+	ldr r5, _08001608 @ =sRtcProbeStatus
 	movs r0, #0
 	strh r0, [r5]
 	bl rtc_intr_disable
@@ -23,7 +23,7 @@ rtc_probe_status: @ 0x080015DC
 	movs r0, #1
 	b _08001632
 	.align 2, 0
-_08001608: .4byte 0x03000240
+_08001608: .4byte sRtcProbeStatus
 _0800160C: .4byte 0x03000254
 _08001610:
 	movs r0, #0xf0
@@ -36,7 +36,7 @@ _0800161A:
 	ldr r4, _0800163C @ =0x03000248
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
-	ldr r5, _08001640 @ =0x03000240
+	ldr r5, _08001640 @ =sRtcProbeStatus
 	ldrh r0, [r5]
 	cmp r0, #0
 	bne _08001634
@@ -50,7 +50,7 @@ _08001634:
 	bx r0
 	.align 2, 0
 _0800163C: .4byte 0x03000248
-_08001640: .4byte 0x03000240
+_08001640: .4byte sRtcProbeStatus
 
 	thumb_func_start rtc_get_probe_status
 rtc_get_probe_status:
@@ -58,12 +58,34 @@ rtc_get_probe_status:
 	ldrh r0, [r0]
 	bx lr
 	.align 2, 0
-_0800164C: .4byte 0x03000240
+_0800164C: .4byte sRtcProbeStatus
 
-_08001650: @ sub_8001650 is hidden here
-	.byte 0x10, 0xB5, 0x02, 0x1C, 0x05, 0x48, 0x01, 0x88, 0xFF, 0x20, 0x00, 0x01, 0x08, 0x40, 0x00, 0x28
-	.byte 0x08, 0xD0, 0x11, 0x1C, 0x02, 0x48, 0x1C, 0xC8, 0x1C, 0xC1, 0x06, 0xE0, 0x40, 0x02, 0x00, 0x03
-	.byte 0x2C, 0x3A, 0x00, 0x08, 0x10, 0x1C, 0x00, 0xF0, 0x1B, 0xF8, 0x10, 0xBC, 0x01, 0xBC, 0x00, 0x47
+	@ Equals to berry fix's payload rtc sub_020106EC
+	thumb_func_start sub_8001650
+sub_8001650: @ 0x08001650
+	push {r4, lr}
+	adds r2, r0, #0
+	ldr r0, _0800166C @ =sRtcProbeStatus
+	ldrh r1, [r0]
+	movs r0, #0xFF
+	lsls r0, r0, #0x4
+	ands r0, r0, r1
+	cmp r0, #0
+	beq _8001674
+	adds r1, r2, #0
+	ldr r0, _08001670 @ =sDefaultRTC
+	ldmia r0!, {r2, r3, r4}
+	stmia r1!, {r2, r3, r4}
+	b _800167A
+_0800166C: .4byte sRtcProbeStatus
+_08001670: .4byte sDefaultRTC
+_8001674:
+	adds r0, r2, #0
+	bl rtc_get_status_and_datetime
+_800167A:
+	pop {r4}
+	pop {r0}
+	bx r0
 
 	thumb_func_start rtc_get_datetime
 rtc_get_datetime: @ 0x08001680

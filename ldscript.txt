@@ -11,6 +11,8 @@ SECTIONS
     MultiBoot_required_data = 0x03000A58;
     sLocked = 0x03000A62;
 
+    sDefaultRTC = 0x08003A2C;
+
     . = 0x08000000;
     .text :
     ALIGN(4)
