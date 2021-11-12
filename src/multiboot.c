@@ -1,10 +1,6 @@
 #include "gba/gba.h"
 #include "multiboot.h"
-
-// to help in decompiling
-#define asm_comment(x) asm volatile("@ -- " x " -- ")
-#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
-#define NAKED __attribute__((naked))
+#include "naked.h"
 
 extern u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
 

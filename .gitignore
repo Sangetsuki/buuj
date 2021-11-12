@@ -18,3 +18,4 @@ build/
 *.dump
 .vscode/
 *.a
+.github/calcrom/
