@@ -163,7 +163,7 @@ _080017FE:
 	thumb_func_start sub_8001804
 sub_8001804: @ 0x08001804
 	push {r4, lr}
-	ldr r4, _0800181C @ =0x03000248
+	ldr r4, _0800181C @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4]
@@ -172,12 +172,12 @@ sub_8001804: @ 0x08001804
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800181C: .4byte 0x03000248
+_0800181C: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001820
 sub_8001820: @ 0x08001820
 	push {r4, lr}
-	ldr r4, _08001838 @ =0x03000248
+	ldr r4, _08001838 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4, #1]
@@ -186,12 +186,12 @@ sub_8001820: @ 0x08001820
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08001838: .4byte 0x03000248
+_08001838: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_800183C
 sub_800183C: @ 0x0800183C
 	push {r4, lr}
-	ldr r4, _08001854 @ =0x03000248
+	ldr r4, _08001854 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4, #2]
@@ -200,12 +200,12 @@ sub_800183C: @ 0x0800183C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08001854: .4byte 0x03000248
+_08001854: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001858
 sub_8001858: @ 0x08001858
 	push {r4, lr}
-	ldr r4, _08001870 @ =0x03000248
+	ldr r4, _08001870 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4, #4]
@@ -214,12 +214,12 @@ sub_8001858: @ 0x08001858
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08001870: .4byte 0x03000248
+_08001870: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001874
 sub_8001874: @ 0x08001874
 	push {r4, lr}
-	ldr r4, _0800188C @ =0x03000248
+	ldr r4, _0800188C @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4, #5]
@@ -228,12 +228,12 @@ sub_8001874: @ 0x08001874
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800188C: .4byte 0x03000248
+_0800188C: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001890
 sub_8001890: @ 0x08001890
 	push {r4, lr}
-	ldr r4, _080018A8 @ =0x03000248
+	ldr r4, _080018A8 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	ldrb r0, [r4, #6]
@@ -242,7 +242,7 @@ sub_8001890: @ 0x08001890
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080018A8: .4byte 0x03000248
+_080018A8: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_80018AC
 sub_80018AC: @ 0x080018AC
@@ -250,7 +250,7 @@ sub_80018AC: @ 0x080018AC
 	adds r5, r0, #0
 	cmp r5, #0
 	blt _080018CC
-	ldr r4, _080018D4 @ =0x03000248
+	ldr r4, _080018D4 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -264,7 +264,7 @@ _080018CC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080018D4: .4byte 0x03000248
+_080018D4: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_80018D8
 sub_80018D8: @ 0x080018D8
@@ -273,7 +273,7 @@ sub_80018D8: @ 0x080018D8
 	subs r0, r5, #1
 	cmp r0, #0xb
 	bhi _080018FA
-	ldr r4, _08001900 @ =0x03000248
+	ldr r4, _08001900 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -287,7 +287,7 @@ _080018FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001900: .4byte 0x03000248
+_08001900: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001904
 sub_8001904: @ 0x08001904
@@ -296,7 +296,7 @@ sub_8001904: @ 0x08001904
 	subs r0, r5, #1
 	cmp r0, #0x1e
 	bhi _08001926
-	ldr r4, _0800192C @ =0x03000248
+	ldr r4, _0800192C @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -310,7 +310,7 @@ _08001926:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800192C: .4byte 0x03000248
+_0800192C: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001930
 sub_8001930: @ 0x08001930
@@ -318,7 +318,7 @@ sub_8001930: @ 0x08001930
 	adds r5, r0, #0
 	cmp r5, #0x18
 	bhi _08001950
-	ldr r4, _08001958 @ =0x03000248
+	ldr r4, _08001958 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -332,7 +332,7 @@ _08001950:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001958: .4byte 0x03000248
+_08001958: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_800195C
 sub_800195C: @ 0x0800195C
@@ -340,7 +340,7 @@ sub_800195C: @ 0x0800195C
 	adds r5, r0, #0
 	cmp r5, #0x3b
 	bhi _0800197C
-	ldr r4, _08001984 @ =0x03000248
+	ldr r4, _08001984 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -354,7 +354,7 @@ _0800197C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08001984: .4byte 0x03000248
+_08001984: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_8001988
 sub_8001988: @ 0x08001988
@@ -362,7 +362,7 @@ sub_8001988: @ 0x08001988
 	adds r5, r0, #0
 	cmp r5, #0x3b
 	bhi _080019A8
-	ldr r4, _080019B0 @ =0x03000248
+	ldr r4, _080019B0 @ =sRtcInfoBuffer
 	adds r0, r4, #0
 	bl rtc_get_status_and_datetime
 	lsls r0, r5, #0x18
@@ -376,7 +376,7 @@ _080019A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080019B0: .4byte 0x03000248
+_080019B0: .4byte sRtcInfoBuffer
 
 	thumb_func_start sub_80019B4
 sub_80019B4: @ 0x080019B4

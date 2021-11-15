@@ -2,14 +2,23 @@ OUTPUT_ARCH(arm)
 
 SECTIONS
 {
-    sRtcProbeStatus = 0x03000240;
     sRtcInfoBuffer = 0x03000248;
-    sRtcProbeCode = 0x03000254;
-    sImeBak = 0x03000256;
     gNewKeys = 0x03000B0C;
     gHeldKeys = 0x03000AAC;
-    MultiBoot_required_data = 0x03000A58;
-    sLocked = 0x03000A62;
+
+    . = 0x3000000;
+    iwram (NOLOAD) :
+    ALIGN(4)
+    {
+        . = 0x240;
+        src/rtc.o(.bss);
+        . = 0xA58;
+        src/multiboot.o(.bss);
+        . = 0xA62;
+        src/siirtc.o(.bss);
+        end = .;
+        . = 0x8000;
+    }
 
     . = 0x08000000;
     .text :

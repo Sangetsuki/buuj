@@ -2,7 +2,7 @@
 #include "multiboot.h"
 #include "naked.h"
 
-extern u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
+static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
 
 static int MultiBootSend(struct MultiBootParam *mp, u16 data);
 static int MultiBootHandShake(struct MultiBootParam *mp);

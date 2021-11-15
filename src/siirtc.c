@@ -53,7 +53,7 @@
 void GPIOPortReadEnable();
 void GPIOPortReadDisable();
 
-extern bool8 sLocked;
+static bool8 sLocked;
 
 static int WriteCommand(u8 value);
 static int WriteData(u8 value);

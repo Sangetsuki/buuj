@@ -2,11 +2,11 @@
 #include "siirtc.h"
 #include "naked.h"
 
-extern u16 sRtcProbeStatus;
-extern struct SiiRtcInfo sRtcInfoBuffer;
-extern u8 sRtcProbeCode;
-extern u16 sImeBak;
-extern struct SiiRtcInfo sRtcInfoWork;
+static u16 sRtcProbeStatus;
+static struct SiiRtcInfo sRtcInfoBuffer;
+static u8 sRtcProbeCode;
+static u16 sImeBak;
+static struct SiiRtcInfo sRtcInfoWork;
 
 void rtc_get_status_and_datetime(struct SiiRtcInfo *);
 
