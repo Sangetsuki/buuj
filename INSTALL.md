@@ -16,6 +16,7 @@ To set up the repository:
 
 To build:
 ```
+	make tools
 	make
 ```
 

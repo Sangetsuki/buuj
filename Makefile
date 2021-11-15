@@ -38,7 +38,10 @@ BUILD_DIR = build
 C_BUILDDIR = $(BUILD_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(BUILD_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(BUILD_DIR)/$(DATA_ASM_SUBDIR)
+
 TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLBASE = $(TOOLDIRS:tools/%=%)
+TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
 #### Files/Directories ####
 
@@ -70,7 +73,10 @@ FIX  := tools/gbafix/gbafix$(EXE)
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
 
-all: $(ROM)
+all: $(ROM) tools
+
+tools:
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) -C $(tooldir);)
 
 include graphics.mk
 
@@ -100,23 +106,19 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s graphics
 	$(AS) $(ASFLAGS) $< -o $@
 
-clean:
+clean: clean-tools
 	rm -f $(ROM) $(ELF) $(MAP) 
 	rm -r $(BUILD_DIR)/
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	$(MAKE) clean -C libagbsyscall
 
-compare: $(ROM)
+clean-tools:
+	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+
+compare: all
 	sha1sum -c $(BUILD_NAME).sha1
 
 libagbsyscall/libagbsyscall.a:
 	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
-	
-SYMTAB := $(BUILD_NAME)_syms.dump
 
-symtab: $(SYMTAB)
-
-$(SYMTAB): $(ELF)
-	$(DEVKITARM)/bin/arm-none-eabi-nm $< | uniq > $@
-
-.PHONY: compare all clean
+.PHONY: compare all clean clean-tools tools
