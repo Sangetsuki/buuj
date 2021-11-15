@@ -52,6 +52,8 @@ SECTIONS
         */
     } = 0
 
+    sDaysPerMonth = 0x08003A38;
+
 	.rodata :
 	ALIGN(4)
 	{

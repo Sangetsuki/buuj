@@ -23,6 +23,21 @@ const struct SiiRtcInfo sDefaultRTC = {
     .alarmMinute = 0
 };
 
+const s32 sDaysPerMonth[] = {
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+};
+
 void rtc_intr_disable(void)
 {
     sImeBak = REG_IME;

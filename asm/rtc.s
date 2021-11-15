@@ -61,14 +61,14 @@ _0800172C:
 _08001744:
 	cmp r5, #2
 	bne _08001754
-	ldr r0, _08001750 @ =0x08003A38
+	ldr r0, _08001750 @ =sDaysPerMonth
 	ldr r0, [r0, #4]
 	adds r0, #1
 	b _0800175E
 	.align 2, 0
-_08001750: .4byte 0x08003A38
+_08001750: .4byte sDaysPerMonth
 _08001754:
-	ldr r0, _080017C0 @ =0x08003A38
+	ldr r0, _080017C0 @ =sDaysPerMonth
 	subs r1, r5, #1
 	lsls r1, r1, #2
 	adds r1, r1, r0
@@ -124,7 +124,7 @@ _080017B6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080017C0: .4byte 0x08003A38
+_080017C0: .4byte sDaysPerMonth
 
 	thumb_func_start rtc_reset
 rtc_reset: @ 0x080017D8

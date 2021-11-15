@@ -19,3 +19,5 @@ build/
 .vscode/
 *.a
 .github/calcrom/
+status
+tools/ramscrgen

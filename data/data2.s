@@ -2,4 +2,4 @@
 
 	.global data2
 data2:
-	.incbin "baserom.gba", 0x3A38, 0x3FC5C8
+	.incbin "baserom.gba", 0x3A68, 0x3FC598
