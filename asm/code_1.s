@@ -54,25 +54,25 @@ _080003E8: @ jump table
 	.4byte _0800042C @ case 5
 	.4byte _08000444 @ case 6
 _08000404:
-	ldr r0, _08000408 @ =0x08003A68
+	ldr r0, _08000408 @ =waiting1
 	b _0800042E
 	.align 2, 0
-_08000408: .4byte 0x08003A68
+_08000408: .4byte waiting1
 _0800040C:
-	ldr r0, _08000410 @ =0x08003A7E
+	ldr r0, _08000410 @ =waiting2
 	b _0800042E
 	.align 2, 0
-_08000410: .4byte 0x08003A7E
+_08000410: .4byte waiting2
 _08000414:
-	ldr r0, _08000418 @ =0x08003A94
+	ldr r0, _08000418 @ =transferring
 	b _0800042E
 	.align 2, 0
-_08000418: .4byte 0x08003A94
+_08000418: .4byte transferring
 _0800041C:
-	ldr r0, _08000420 @ =0x08003AB4
+	ldr r0, _08000420 @ =checking
 	b _0800042E
 	.align 2, 0
-_08000420: .4byte 0x08003AB4
+_08000420: .4byte checking
 _08000424:
 	ldr r0, _08000428 @ =0x08003ACC
 	b _0800042E
