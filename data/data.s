@@ -12,6 +12,3 @@ pokeballsPalette:
 pokeballs:
 	.incbin "graphics/pokeballs.4bpp"
 
-	.global data2
-data2:
-	.incbin "baserom.gba", 0x3A2C, 0x3FC5D4
