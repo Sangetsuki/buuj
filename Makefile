@@ -11,6 +11,10 @@ endif
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 
+GAME_CODE   := BUUJ
+MAKER_CODE  := 01
+REVISION    := 0
+
 ifeq ($(OS),Windows_NT)
 EXE := .exe
 else
@@ -61,6 +65,7 @@ LIBPATH := -L../tools/agbcc/lib
 LIB := $(LIBPATH) -lgcc -lc -L../libagbsyscall -lagbsyscall
 
 GFX  := tools/gbagfx/gbagfx$(EXE)
+FIX  := tools/gbafix/gbafix$(EXE)
 
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
@@ -71,9 +76,11 @@ include graphics.mk
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary  $< $@
+	$(FIX) $@ -p10 --silent
 
 $(ELF): $(ALL_OBJS) $(LDSCRIPT) libagbsyscall/libagbsyscall.a 
 	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) -o ../$@ $(LIB)
+	$(FIX) $@ -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(C_BUILDDIR)/siirtc.o: $(C_SUBDIR)/siirtc.c
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/siirtc.i
