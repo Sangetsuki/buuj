@@ -10,20 +10,21 @@ Start: @ 0x08000000
 Init:
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_fc, r0
-	ldr sp, _080000F8 @ =0x03007FA0
+	ldr sp, sp_irq @ =0x03007FA0
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_fc, r0
-	ldr sp, _080000F4 @ =0x03007F00
+	ldr sp, sp_sys @ =0x03007F00
 	ldr r1, _080001C8 @ =0x03007FFC
 	add r0, pc, #0x18 @ =0x080000FC
 	str r0, [r1]
 	ldr r1, _080001CC @ =AgbMain
 	mov lr, pc
 	bx r1
-_080000F0:
-	.byte 0xF2, 0xFF, 0xFF, 0xEA
-_080000F4: .4byte 0x03007F00
-_080000F8: .4byte 0x03007FA0
+	b Init
+	
+	.align 2, 0
+sp_sys: .4byte IWRAM_END - 0x100
+sp_irq: .4byte IWRAM_END - 0x60
 _080000FC:
 	.byte 0x01, 0xC3, 0xA0, 0xE3
 	.byte 0x02, 0x3C, 0x8C, 0xE2, 0x00, 0x20, 0x93, 0xE5, 0x22, 0x18, 0x02, 0xE0, 0x00, 0x20, 0xA0, 0xE3
