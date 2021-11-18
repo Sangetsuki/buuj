@@ -33,7 +33,6 @@ SECTIONS
         src/rtc.o(.text);
         asm/rtc.o(.text);
         src/rtc_2.o(.text);
-        asm/rtc_2.o(.text);
         asm/sub_80019B4.o(.text);
         src/multiboot.o(.text);
         asm/after_multiboot.o(.text);
