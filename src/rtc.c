@@ -56,6 +56,7 @@ s32 bcd_to_hex(u8 a0)
     return ((a0 >> 4) & 0xF) * 10 + (a0 & 0xF);
 }
 
+// I dont even know if this is right
 NAKED
 void rtc_probe_status(void)
 {
