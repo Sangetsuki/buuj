@@ -2,7 +2,6 @@ OUTPUT_ARCH(arm)
 
 SECTIONS
 {
-    sRtcInfoBuffer = 0x03000248;
     gNewKeys = 0x03000B0C;
     gHeldKeys = 0x03000AAC;
 
@@ -31,8 +30,6 @@ SECTIONS
         src/ReadKeys.o(.text);
         asm/code_2.o(.text);
         src/rtc.o(.text);
-        asm/rtc.o(.text);
-        src/rtc_2.o(.text);
         asm/sub_80019B4.o(.text);
         src/multiboot.o(.text);
         asm/after_multiboot.o(.text);
@@ -53,8 +50,6 @@ SECTIONS
         *libgcc.a:_umodsi3.o*(.text);
         */
     } = 0
-
-    sDaysPerMonth = 0x08003A38;
 
 	.rodata :
 	ALIGN(4)
