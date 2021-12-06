@@ -12,3 +12,11 @@ void ReadKeys(void)
     gNewKeys = keyInput & ~gHeldKeys;
     gHeldKeys = keyInput;
 }
+
+void sub_8000A94()
+{
+    INTR_CHECK = 1;
+}
+
+void sub_8000AA0()
+{}

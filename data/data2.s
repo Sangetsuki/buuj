@@ -50,7 +50,19 @@ gUnknown_8004070:
 
 	.global gUnknown_8004270
 gUnknown_8004270:
-	.incbin "baserom.gba", 0x4270, 0x1ddc
+	.incbin "baserom.gba", 0x4270, 0x1C94
+
+	.global MultiSio
+MultiSio:
+	.ascii "MultiSio010918\0\0"
+
+	.global siirtc_data
+siirtc_data:
+	.ascii "SIIRTC_V001\0"
+
+	.global gUnknown_8005f20
+gUnknown_8005f20:
+	.incbin "baserom.gba", 0x5f20, 0x12C
 
 	.global gUnknown_800604c
 gUnknown_800604c:
