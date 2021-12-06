@@ -52,7 +52,7 @@ _0800233C: @ I'm dumb and I don't know nothing about this
 sub_80025DC: @ 0x080025DC
 	push {r4, r5, lr}
 	movs r5, #0
-	ldr r4, _08002644 @ =0x03001050
+	ldr r4, _08002644 @ =gUnknown_3001050
 	ldr r2, [r4, #0x28]
 	ldrb r1, [r4, #0xb]
 	strb r1, [r2]
@@ -105,7 +105,7 @@ _0800263E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08002644: .4byte 0x03001050
+_08002644: .4byte gUnknown_3001050
 _08002648: .4byte 0x04000004
 _0800264C: .4byte 0x0400010E
 
@@ -118,12 +118,12 @@ sub_8002650: @ 0x08002650
 	push {r5, r6, r7}
 	sub sp, #0x10
 	str r0, [sp, #0xc]
-	ldr r0, _08002700 @ =0x03001200
+	ldr r0, _08002700 @ =gUnknown_3001200
 	movs r4, #0
 	str r4, [sp]
 	bl _call_via_r0
 	str r0, [sp, #4]
-	ldr r0, _08002704 @ =0x03001050
+	ldr r0, _08002704 @ =gUnknown_3001050
 	strb r4, [r0, #3]
 	movs r5, #0
 	add r1, sp, #4
@@ -184,7 +184,7 @@ _080026CA:
 	adds r5, r6, #0
 	cmp r5, #3
 	ble _0800267E
-	ldr r1, _08002704 @ =0x03001050
+	ldr r1, _08002704 @ =gUnknown_3001050
 	ldrb r0, [r1, #2]
 	ldrb r2, [r1, #3]
 	orrs r0, r2
@@ -199,7 +199,7 @@ _080026CA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08002700: .4byte 0x03001200
-_08002704: .4byte 0x03001050
+_08002700: .4byte gUnknown_3001200
+_08002704: .4byte gUnknown_3001050
 _08002708: .4byte 0x04000004
 _0800270C: .4byte 0x05000004

@@ -131,7 +131,7 @@ sub_8000C18: @ 0x08000C18
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0
-	ldr r2, _08000C50 @ =0x03000B0C
+	ldr r2, _08000C50 @ =gNewKeys
 	ldrh r1, [r2]
 	movs r0, #0x40
 	ands r0, r1
@@ -158,12 +158,12 @@ _08000C48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000C50: .4byte 0x03000B0C
+_08000C50: .4byte gNewKeys
 
 	thumb_func_start sub_8000C54
 sub_8000C54: @ 0x08000C54
 	push {lr}
-	ldr r0, _08000C68 @ =0x03000B0C
+	ldr r0, _08000C68 @ =gNewKeys
 	ldrh r1, [r0]
 	movs r0, #0x40
 	ands r0, r1
@@ -173,7 +173,7 @@ sub_8000C54: @ 0x08000C54
 	rsbs r0, r0, #0
 	b _08000C7A
 	.align 2, 0
-_08000C68: .4byte 0x03000B0C
+_08000C68: .4byte gNewKeys
 _08000C6C:
 	movs r0, #0x80
 	ands r0, r1
@@ -257,7 +257,7 @@ _08000CA4:
 	movs r3, #0xf
 	bl sub_8001B10
 	bl ReadKeys
-	ldr r0, _08000D58 @ =0x03000B0C
+	ldr r0, _08000D58 @ =gNewKeys
 	ldrh r1, [r0]
 	movs r0, #2
 	ands r0, r1
@@ -265,7 +265,7 @@ _08000CA4:
 	beq _08000D2C
 	bl sub_8000378
 _08000D2C:
-	ldr r0, _08000D5C @ =0x03000AAC
+	ldr r0, _08000D5C @ =gHeldKeys
 	ldrh r2, [r0]
 	movs r0, #1
 	ands r0, r2
@@ -287,11 +287,11 @@ _08000D2C:
 	bl sub_8001C34
 	b _08000EE4
 	.align 2, 0
-_08000D58: .4byte 0x03000B0C
-_08000D5C: .4byte 0x03000AAC
+_08000D58: .4byte gNewKeys
+_08000D5C: .4byte gHeldKeys
 _08000D60: .4byte 0x08003310
 _08000D64:
-	ldr r1, _08000D84 @ =0x03000B0C
+	ldr r1, _08000D84 @ =gNewKeys
 	ldrh r2, [r1]
 	movs r0, #8
 	ands r0, r2
@@ -306,7 +306,7 @@ _08000D64:
 	bl sub_8001C34
 	b _08000EE4
 	.align 2, 0
-_08000D84: .4byte 0x03000B0C
+_08000D84: .4byte gNewKeys
 _08000D88: .4byte 0x08003324
 _08000D8C:
 	ldr r0, [sp, #8]
@@ -478,13 +478,13 @@ _08000EE4:
 	movs r0, #0
 	strh r0, [r1]
 	ldr r0, _08000F4C @ =0x080000FC
-	ldr r4, _08000F50 @ =0x03000030
+	ldr r4, _08000F50 @ =gUnknown_3000030
 	ldr r2, _08000F54 @ =0x04000080
 	adds r1, r4, #0
 	bl CpuSet
-	ldr r0, _08000F58 @ =0x03007FFC
+	ldr r0, _08000F58 @ =gUnknown_3007ffc
 	str r4, [r0]
-	ldr r1, _08000F5C @ =0x03000A70
+	ldr r1, _08000F5C @ =gUnknown_3000a70
 	ldr r2, _08000F60 @ =0x08000AA1
 	adds r0, r1, #0
 	adds r0, #0x30
@@ -520,10 +520,10 @@ _08000F44:
 	.align 2, 0
 _08000F48: .4byte 0x04000208
 _08000F4C: .4byte 0x080000FC
-_08000F50: .4byte 0x03000030
+_08000F50: .4byte gUnknown_3000030
 _08000F54: .4byte 0x04000080
-_08000F58: .4byte 0x03007FFC
-_08000F5C: .4byte 0x03000A70
+_08000F58: .4byte gUnknown_3007ffc
+_08000F5C: .4byte gUnknown_3000a70
 _08000F60: .4byte 0x08000AA1
 _08000F64: .4byte 0x04000004
 _08000F68: .4byte 0x00009F08
@@ -603,11 +603,11 @@ sub_8000FD4: @ 0x08000FD4
 	movs r3, #0
 	bl sub_8000504
 	bl sub_8000F78
-	ldr r6, _080010B0 @ =0x03000B10
+	ldr r6, _080010B0 @ =gUnknown_3000b10
 _08001002:
 	adds r4, r5, #0
 	bl ReadKeys
-	ldr r0, _080010B4 @ =0x03000B0C
+	ldr r0, _080010B4 @ =gNewKeys
 	ldrh r1, [r0]
 	movs r0, #0x40
 	ands r0, r1
@@ -624,7 +624,7 @@ _08001002:
 	adds r4, r0, #0
 	adds r4, #8
 _08001028:
-	ldr r2, _080010B4 @ =0x03000B0C
+	ldr r2, _080010B4 @ =gNewKeys
 	ldrh r1, [r2]
 	movs r0, #0x80
 	ands r0, r1
@@ -692,8 +692,8 @@ _0800106A:
 	b _08001002
 	.align 2, 0
 _080010AC: .4byte 0x08003B50
-_080010B0: .4byte 0x03000B10
-_080010B4: .4byte 0x03000B0C
+_080010B0: .4byte gUnknown_3000b10
+_080010B4: .4byte gNewKeys
 _080010B8: .4byte 0x000001FF
 _080010BC: .4byte 0xFFFFFE00
 _080010C0:
@@ -711,14 +711,14 @@ AgbMain: @ 0x080010CC
 	bl rtc_probe_status
 	bl sub_8000664
 	bl sub_8000770
-	ldr r0, _08001194 @ =0x03000234
+	ldr r0, _08001194 @ =gUnknown_3000234
 	movs r1, #0
 	str r1, [r0]
-	ldr r0, _08001198 @ =0x03000230
+	ldr r0, _08001198 @ =gUnknown_3000230
 	str r1, [r0]
 	bl sub_8000378
 	bl ReadKeys
-	ldr r0, _0800119C @ =0x03000AAC
+	ldr r0, _0800119C @ =gHeldKeys
 	ldrh r2, [r0]
 	movs r1, #0x89
 	lsls r1, r1, #2
@@ -776,20 +776,20 @@ _08001120:
 	movs r2, #0x94
 	movs r3, #0
 	bl sub_8000504
-	ldr r0, _080011B0 @ =0x03000028
+	ldr r0, _080011B0 @ =gUnknown_3000028
 	str r5, [r0]
-	ldr r2, _080011B4 @ =0x03000AA4
+	ldr r2, _080011B4 @ =gUnknown_3000aa4
 	ldr r0, _080011B8 @ =0x0800604C
 	adds r0, r6, r0
 	ldr r1, [r0]
 	str r1, [r2]
-	ldr r2, _080011BC @ =0x03000AB0
+	ldr r2, _080011BC @ =gUnknown_3000ab0
 	ldr r0, _080011C0 @ =0x08006074
 	adds r0, r6, r0
 	ldr r0, [r0]
 	subs r0, r0, r1
 	str r0, [r2]
-	ldr r0, _080011C4 @ =0x03000AC0
+	ldr r0, _080011C4 @ =gUnknown_3000ac0
 	str r1, [r0, #0x28]
 	adds r1, r0, #0
 	adds r1, #0x4b
@@ -799,21 +799,21 @@ _08001120:
 	lsls r4, r4, #1
 	b _080011E8
 	.align 2, 0
-_08001194: .4byte 0x03000234
-_08001198: .4byte 0x03000230
-_0800119C: .4byte 0x03000AAC
+_08001194: .4byte gUnknown_3000234
+_08001198: .4byte gUnknown_3000230
+_0800119C: .4byte gHeldKeys
 _080011A0: .4byte 0x08008A74
 _080011A4: .4byte 0x00007FFF
 _080011A8: .4byte 0x060001DE
 _080011AC: .4byte gUnknown_2000004
-_080011B0: .4byte 0x03000028
-_080011B4: .4byte 0x03000AA4
+_080011B0: .4byte gUnknown_3000028
+_080011B4: .4byte gUnknown_3000aa4
 _080011B8: .4byte 0x0800604C
-_080011BC: .4byte 0x03000AB0
+_080011BC: .4byte gUnknown_3000ab0
 _080011C0: .4byte 0x08006074
-_080011C4: .4byte 0x03000AC0
+_080011C4: .4byte gUnknown_3000ac0
 _080011C8:
-	ldr r0, _080011E4 @ =0x03000AAC
+	ldr r0, _080011E4 @ =gHeldKeys
 	ldrh r1, [r0]
 	adds r0, r4, #0
 	ands r0, r1
@@ -826,7 +826,7 @@ _080011C8:
 	bl sub_8000338
 	b _080011F6
 	.align 2, 0
-_080011E4: .4byte 0x03000AAC
+_080011E4: .4byte gHeldKeys
 _080011E8:
 	bl VBlankIntrWait
 	adds r0, r7, #0
@@ -838,13 +838,13 @@ _080011F6:
 	movs r0, #0
 	strh r0, [r1]
 	ldr r0, _0800124C @ =0x080000FC
-	ldr r4, _08001250 @ =0x03000030
+	ldr r4, _08001250 @ =gUnknown_3000030
 	ldr r2, _08001254 @ =0x04000080
 	adds r1, r4, #0
 	bl CpuSet
-	ldr r0, _08001258 @ =0x03007FFC
+	ldr r0, _08001258 @ =gUnknown_3007ffc
 	str r4, [r0]
-	ldr r1, _0800125C @ =0x03000A70
+	ldr r1, _0800125C @ =gUnknown_3000a70
 	ldr r2, _08001260 @ =0x08000AA1
 	adds r0, r1, #0
 	adds r0, #0x30
@@ -876,10 +876,10 @@ _08001214:
 	.align 2, 0
 _08001248: .4byte 0x04000208
 _0800124C: .4byte 0x080000FC
-_08001250: .4byte 0x03000030
+_08001250: .4byte gUnknown_3000030
 _08001254: .4byte 0x04000080
-_08001258: .4byte 0x03007FFC
-_0800125C: .4byte 0x03000A70
+_08001258: .4byte gUnknown_3007ffc
+_0800125C: .4byte gUnknown_3000a70
 _08001260: .4byte 0x08000AA1
 _08001264: .4byte 0x04000004
 _08001268: .4byte 0x00009F08

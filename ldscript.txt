@@ -15,16 +15,7 @@ SECTIONS
     iwram (NOLOAD) :
     ALIGN(4)
     {
-        . = 0x240;
-        src/rtc.o(.bss);
-        . = 0xA58;
-        src/multiboot.o(.bss);
-        . = 0xA62;
-        src/siirtc.o(.bss);
-        . = 0xAAC;
-        gHeldKeys = .;
-        . = 0xB0C;
-        gNewKeys = .;
+        INCLUDE "../sys_iwram.txt"
         end = .;
         . = 0x8000;
     }
