@@ -2,8 +2,14 @@ OUTPUT_ARCH(arm)
 
 SECTIONS
 {
-    gNewKeys = 0x03000B0C;
-    gHeldKeys = 0x03000AAC;
+    . = 0x2000000;
+    ewram (NOLOAD) :
+    ALIGN(4)
+    {
+        INCLUDE "../sys_ewram.txt"
+        end = .;
+        . = 0x40000;
+    }
 
     . = 0x3000000;
     iwram (NOLOAD) :
@@ -15,6 +21,10 @@ SECTIONS
         src/multiboot.o(.bss);
         . = 0xA62;
         src/siirtc.o(.bss);
+        . = 0xAAC;
+        gHeldKeys = .;
+        . = 0xB0C;
+        gNewKeys = .;
         end = .;
         . = 0x8000;
     }

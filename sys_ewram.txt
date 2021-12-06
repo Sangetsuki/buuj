@@ -1,0 +1,8 @@
+. = 0x4; gUnknown_2000004 = .;
+. = 0x28; gUnknown_2000028 = .;
+. = 0x30; gUnknown_2000030 = .;
+. = 0x34; gUnknown_2000034 = .;
+. = 0x38; gUnknown_2000038 = .;
+. = 0x3c; gUnknown_200003c = .;
+. = 0x40; gUnknown_2000040 = .;
+. = 0x44; gUnknown_2000044 = .;

@@ -701,7 +701,7 @@ _08000A34:
 	lsls r1, r5, #2
 	movs r2, #0x80
 	lsls r2, r2, #0x12
-	ldr r0, _08000A60 @ =0x02000004
+	ldr r0, _08000A60 @ =gUnknown_2000004
 	adds r1, r1, r0
 	ldr r0, [r1]
 	adds r0, #1
@@ -719,4 +719,4 @@ _08000A58:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08000A60: .4byte 0x02000004
+_08000A60: .4byte gUnknown_2000004

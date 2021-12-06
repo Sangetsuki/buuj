@@ -1,12 +1,8 @@
 TOOLCHAIN := $(DEVKITARM)
-ifneq (,$(wildcard $(TOOLCHAIN)/base_tools))
-include $(TOOLCHAIN)/base_tools
-else
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 export AS := $(PREFIX)as
-endif
 
 export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
