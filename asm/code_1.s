@@ -120,7 +120,7 @@ sub_800046C: @ 0x0800046C
 	adds r5, r0, #0
 	movs r4, #1
 	movs r7, #0
-	ldr r0, _080004A4 @ =0x03000010
+	ldr r0, _080004A4 @ =gUnknown_3000010
 	mov r8, r0
 	cmp r5, #1
 	blt _0800048C
@@ -143,7 +143,7 @@ _0800048C:
 	strh r4, [r1, #2]
 	b _080004E2
 	.align 2, 0
-_080004A4: .4byte 0x03000010
+_080004A4: .4byte gUnknown_3000010
 _080004A8:
 	cmp r4, #0
 	ble _080004DA
@@ -311,7 +311,7 @@ sub_80005D0: @ 0x080005D0
 	mov sb, r3
 	movs r4, #0xa
 	movs r7, #0
-	ldr r0, _08000658 @ =0x03000010
+	ldr r0, _08000658 @ =gUnknown_3000010
 	mov r8, r0
 	mov r6, r8
 _080005F2:
@@ -361,7 +361,7 @@ _080005F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000658: .4byte 0x03000010
+_08000658: .4byte gUnknown_3000010
 
 	thumb_func_start sub_800065C
 sub_800065C: @ 0x0800065C

@@ -5,12 +5,12 @@
 
 	thumb_func_start sub_8000A94
 sub_8000A94: @ 0x08000A94
-	ldr r1, _08000A9C @ =0x03007FF8
+	ldr r1, _08000A9C @ =INTR_CHECK
 	movs r0, #1
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_08000A9C: .4byte 0x03007FF8
+_08000A9C: .4byte INTR_CHECK
 
 	thumb_func_start sub_8000AA0
 sub_8000AA0: @ 0x08000AA0
