@@ -573,7 +573,7 @@ _08000EE4:
 	ldr r0, _08000F58 @ =gUnknown_3007ffc
 	str r4, [r0]
 	ldr r1, _08000F5C @ =gUnknown_3000a70
-	ldr r2, _08000F60 @ =0x08000AA1
+	ldr r2, _08000F60 @ =sub_8000AA0 + 1
 	adds r0, r1, #0
 	adds r0, #0x30
 _08000F06:
@@ -597,7 +597,7 @@ _08000F06:
 	bl sub_8000334
 	bl VBlankIntrWait
 	bl sub_8001C0C
-	ldr r3, _08000F74 @ =0x08003338
+	ldr r3, _08000F74 @ =gUnknown_8003338
 	movs r0, #4
 	movs r1, #0xa
 	movs r2, #0
@@ -612,12 +612,12 @@ _08000F50: .4byte gUnknown_3000030
 _08000F54: .4byte 0x04000080
 _08000F58: .4byte gUnknown_3007ffc
 _08000F5C: .4byte gUnknown_3000a70
-_08000F60: .4byte 0x08000AA1
+_08000F60: .4byte sub_8000AA0 + 1
 _08000F64: .4byte 0x04000004
 _08000F68: .4byte 0x00009F08
 _08000F6C: .4byte 0x04000202
 _08000F70: .4byte 0x00002001
-_08000F74: .4byte 0x08003338
+_08000F74: .4byte gUnknown_8003338
 
 	thumb_func_start sub_8000F78
 sub_8000F78: @ 0x08000F78
@@ -968,7 +968,7 @@ _08001250: .4byte gUnknown_3000030
 _08001254: .4byte 0x04000080
 _08001258: .4byte gUnknown_3007ffc
 _0800125C: .4byte gUnknown_3000a70
-_08001260: .4byte 0x08000AA1
+_08001260: .4byte sub_8000AA0 + 1
 _08001264: .4byte 0x04000004
 _08001268: .4byte 0x00009F08
 _0800126C: .4byte 0x04000202
