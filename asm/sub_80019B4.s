@@ -6,14 +6,14 @@
 	thumb_func_start sub_80019B4
 sub_80019B4: @ 0x080019B4
 	ldr r0, _08001A04 @ =0x040000D4
-	ldr r1, _08001A08 @ =0x08004270
+	ldr r1, _08001A08 @ =gUnknown_8004270
 	str r1, [r0]
 	ldr r1, _08001A0C @ =0x06008000
 	str r1, [r0, #4]
 	ldr r1, _08001A10 @ =0x84000700
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08001A14 @ =0x08004070
+	ldr r1, _08001A14 @ =gUnknown_8004070
 	str r1, [r0]
 	movs r1, #0xa0
 	lsls r1, r1, #0x13
@@ -21,7 +21,7 @@ sub_80019B4: @ 0x080019B4
 	ldr r1, _08001A18 @ =0x84000080
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08001A1C @ =0x08003B70
+	ldr r1, _08001A1C @ =gUnknown_8003b70
 	str r1, [r0]
 	ldr r2, _08001A20 @ =0x03000258
 	str r2, [r0, #4]
@@ -46,12 +46,12 @@ sub_80019B4: @ 0x080019B4
 	bx lr
 	.align 2, 0
 _08001A04: .4byte 0x040000D4
-_08001A08: .4byte 0x08004270
+_08001A08: .4byte gUnknown_8004270
 _08001A0C: .4byte 0x06008000
 _08001A10: .4byte 0x84000700
-_08001A14: .4byte 0x08004070
+_08001A14: .4byte gUnknown_8004070
 _08001A18: .4byte 0x84000080
-_08001A1C: .4byte 0x08003B70
+_08001A1C: .4byte gUnknown_8003b70
 _08001A20: .4byte 0x03000258
 _08001A24: .4byte 0x84000140
 _08001A28: .4byte 0x84000200

@@ -283,13 +283,13 @@ _08000D2C:
 	movs r0, #4
 	movs r1, #0xa
 	movs r2, #0
-	ldr r3, _08000D60 @ =0x08003310
+	ldr r3, _08000D60 @ =gUnknown_8003310
 	bl sub_8001C34
 	b _08000EE4
 	.align 2, 0
 _08000D58: .4byte gNewKeys
 _08000D5C: .4byte gHeldKeys
-_08000D60: .4byte 0x08003310
+_08000D60: .4byte gUnknown_8003310
 _08000D64:
 	ldr r1, _08000D84 @ =gNewKeys
 	ldrh r2, [r1]
@@ -302,12 +302,12 @@ _08000D64:
 	movs r0, #4
 	movs r1, #0xa
 	movs r2, #0
-	ldr r3, _08000D88 @ =0x08003324
+	ldr r3, _08000D88 @ =gUnknown_8003324
 	bl sub_8001C34
 	b _08000EE4
 	.align 2, 0
 _08000D84: .4byte gNewKeys
-_08000D88: .4byte 0x08003324
+_08000D88: .4byte gUnknown_8003324
 _08000D8C:
 	ldr r0, [sp, #8]
 	cmp r0, #0
@@ -540,7 +540,7 @@ sub_8000F78: @ 0x08000F78
 	push {r5, r6, r7}
 	movs r5, #0
 	mov sb, r5
-	ldr r0, _08000FD0 @ =0x08008A74
+	ldr r0, _08000FD0 @ =gUnknown_8008a74
 	mov sl, r0
 	mov r8, r5
 _08000F8C:
@@ -580,14 +580,14 @@ _08000FC2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000FD0: .4byte 0x08008A74 // pokemon name table
+_08000FD0: .4byte gUnknown_8008a74 // pokemon name table
 
 	thumb_func_start sub_8000FD4
 sub_8000FD4: @ 0x08000FD4
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	movs r5, #0
-	ldr r0, _080010AC @ =0x08003B50
+	ldr r0, _080010AC @ =gUnknown_8003b50
 	movs r1, #0xa
 	str r1, [sp]
 	str r5, [sp, #4]
@@ -691,7 +691,7 @@ _0800106A:
 	bl sub_8000904
 	b _08001002
 	.align 2, 0
-_080010AC: .4byte 0x08003B50
+_080010AC: .4byte gUnknown_8003b50
 _080010B0: .4byte gUnknown_3000b10
 _080010B4: .4byte gNewKeys
 _080010B8: .4byte 0x000001FF
@@ -731,7 +731,7 @@ _08001102:
 	bl sub_8000FD4
 	adds r7, r0, #0
 	movs r1, #0
-	ldr r5, _080011A0 @ =0x08008A74
+	ldr r5, _080011A0 @ =gUnknown_8008a74
 	lsls r6, r7, #2
 	ldr r0, _080011A4 @ =0x00007FFF
 	adds r3, r0, #0
@@ -779,12 +779,12 @@ _08001120:
 	ldr r0, _080011B0 @ =gUnknown_3000028
 	str r5, [r0]
 	ldr r2, _080011B4 @ =gUnknown_3000aa4
-	ldr r0, _080011B8 @ =0x0800604C
+	ldr r0, _080011B8 @ =gUnknown_800604c
 	adds r0, r6, r0
 	ldr r1, [r0]
 	str r1, [r2]
 	ldr r2, _080011BC @ =gUnknown_3000ab0
-	ldr r0, _080011C0 @ =0x08006074
+	ldr r0, _080011C0 @ =gUnknown_8006074
 	adds r0, r6, r0
 	ldr r0, [r0]
 	subs r0, r0, r1
@@ -802,15 +802,15 @@ _08001120:
 _08001194: .4byte gUnknown_3000234
 _08001198: .4byte gUnknown_3000230
 _0800119C: .4byte gHeldKeys
-_080011A0: .4byte 0x08008A74
+_080011A0: .4byte gUnknown_8008a74
 _080011A4: .4byte 0x00007FFF
 _080011A8: .4byte 0x060001DE
 _080011AC: .4byte gUnknown_2000004
 _080011B0: .4byte gUnknown_3000028
 _080011B4: .4byte gUnknown_3000aa4
-_080011B8: .4byte 0x0800604C
+_080011B8: .4byte gUnknown_800604c
 _080011BC: .4byte gUnknown_3000ab0
-_080011C0: .4byte 0x08006074
+_080011C0: .4byte gUnknown_8006074
 _080011C4: .4byte gUnknown_3000ac0
 _080011C8:
 	ldr r0, _080011E4 @ =gHeldKeys
@@ -901,7 +901,7 @@ sub_8001274: @ 0x08001274
 	str r2, [sp, #8]
 	lsls r3, r3, #0x10
 	lsrs r3, r3, #0x10
-	ldr r1, _08001330 @ =0x0800609C
+	ldr r1, _08001330 @ =gUnknown_800609c
 	movs r0, #0x1a
 	adds r2, r3, #0
 	muls r2, r0, r2
@@ -986,13 +986,13 @@ _08001304:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08001330: .4byte 0x0800609C
+_08001330: .4byte gUnknown_800609c
 
 	thumb_func_start sub_8001334
 sub_8001334: @ 0x08001334
 	lsls r0, r0, #0x10
 	lsrs r0, r0, #0x10
-	ldr r2, _0800134C @ =0x0800609C
+	ldr r2, _0800134C @ =gUnknown_800609c
 	movs r1, #0x1a
 	muls r0, r1, r0
 	adds r1, r0, r2
@@ -1003,19 +1003,19 @@ sub_8001334: @ 0x08001334
 	subs r0, r0, r1
 	bx lr
 	.align 2, 0
-_0800134C: .4byte 0x0800609C
+_0800134C: .4byte gUnknown_800609c
 
 	thumb_func_start sub_8001350
 sub_8001350: @ 0x08001350
 	push {r4, lr}
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10
-	ldr r1, _080013A0 @ =0x080034CC
+	ldr r1, _080013A0 @ =gUnknown_80034cc
 	lsrs r0, r0, #0x1c
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r2, [r0]
-	ldr r4, _080013A4 @ =0x08003344
+	ldr r4, _080013A4 @ =gUnknown_8003344
 	cmp r2, #0x30
 	bgt _08001380
 	lsls r1, r2, #3
@@ -1050,8 +1050,8 @@ _08001380:
 	adds r0, r1, #0
 	b _080013B0
 	.align 2, 0
-_080013A0: .4byte 0x080034CC
-_080013A4: .4byte 0x08003344
+_080013A0: .4byte gUnknown_80034cc
+_080013A4: .4byte gUnknown_8003344
 _080013A8: .4byte 0x0000019B
 _080013AC:
 	movs r0, #1

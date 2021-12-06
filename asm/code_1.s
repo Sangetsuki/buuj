@@ -74,12 +74,12 @@ _0800041C:
 	.align 2, 0
 _08000420: .4byte checking
 _08000424:
-	ldr r0, _08000428 @ =0x08003ACC
+	ldr r0, _08000428 @ =gUnknown_8003acc
 	b _0800042E
 	.align 2, 0
-_08000428: .4byte 0x08003ACC
+_08000428: .4byte gUnknown_8003acc
 _0800042C:
-	ldr r0, _08000440 @ =0x08003AFA
+	ldr r0, _08000440 @ =gUnknown_8003afa
 _0800042E:
 	movs r1, #0x10
 	str r1, [sp]
@@ -90,9 +90,9 @@ _0800042E:
 	bl sub_80013B8
 	b _08000456
 	.align 2, 0
-_08000440: .4byte 0x08003AFA
+_08000440: .4byte gUnknown_8003afa
 _08000444:
-	ldr r0, _08000464 @ =0x08003B0E
+	ldr r0, _08000464 @ =gUnknown_8003b0e
 	movs r1, #0x10
 	str r1, [sp]
 	movs r1, #0
@@ -108,7 +108,7 @@ _08000456:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08000464: .4byte 0x08003B0E
+_08000464: .4byte gUnknown_8003b0e
 _08000468: .4byte gUnknown_300000c
 _0800046C:
 	.byte 0xF0, 0xB5, 0x47, 0x46
@@ -386,7 +386,7 @@ _08000796:
 	cmp r3, #0
 	bge _08000796
 	movs r3, #0
-	ldr r2, _080008E8 @ =0x0800350C
+	ldr r2, _080008E8 @ =gUnknown_800350c
 	mov sb, r2
 	mov r8, sp
 	str r6, [sp, #8]
@@ -542,7 +542,7 @@ _080007B6:
 	bx r0
 	.align 2, 0
 _080008E4: .4byte gUnknown_3000b10
-_080008E8: .4byte 0x0800350C
+_080008E8: .4byte gUnknown_800350c
 _080008EC: .4byte 0xFFFFFE00
 _080008F0: .4byte 0xFFFFFC00
 _080008F4: .4byte 0x05000200
