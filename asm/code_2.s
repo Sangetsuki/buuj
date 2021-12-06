@@ -21,7 +21,7 @@ sub_8000AA0: @ 0x08000AA0
 sub_8000aa4: @ 0x08000AA4
 	push {lr}
 	sub sp, #8
-	ldr r0, _08000ABC @ =0x08003B1E
+	ldr r0, _08000ABC @ =gUnknown_8003b1e
 	movs r1, #0x10
 	str r1, [sp]
 	movs r1, #0
@@ -32,13 +32,13 @@ sub_8000aa4: @ 0x08000AA4
 _08000ABA:
 	b _08000ABA
 	.align 2, 0
-_08000ABC: .4byte 0x08003B1E
+_08000ABC: .4byte gUnknown_8003b1e
 
 	thumb_func_start sub_8000AC0
 sub_8000AC0: @ 0x08000AC0
 	push {lr}
 	sub sp, #8
-	ldr r0, _08000AE0 @ =0x08003B38
+	ldr r0, _08000AE0 @ =gUnknown_8003b38
 	movs r1, #0x10
 	str r1, [sp]
 	movs r1, #0
@@ -51,7 +51,7 @@ _08000AD6:
 	bl sub_8000904
 	b _08000AD6
 	.align 2, 0
-_08000AE0: .4byte 0x08003B38
+_08000AE0: .4byte gUnknown_8003b38
 
 	thumb_func_start sub_8000AE4
 sub_8000AE4: @ 0x08000AE4

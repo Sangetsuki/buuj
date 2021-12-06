@@ -42,4 +42,4 @@ _080000FC:
 	.byte 0x00, 0x00, 0x91, 0xE5, 0x10, 0xFF, 0x2F, 0xE1
 _080001C8: .4byte INTR_VECTOR
 _080001CC: .4byte AgbMain
-_080001D0: .4byte 0x03000A70
+_080001D0: .4byte gUnknown_3000a70

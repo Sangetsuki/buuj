@@ -26,7 +26,15 @@ gUnknown_8003afa:
 
 	.global gUnknown_8003b0e
 gUnknown_8003b0e:
-	.incbin "baserom.gba", 0x3b0e, 0x42
+	.incbin "baserom.gba", 0x3b0e, 0x10
+
+	.global gUnknown_8003b1e
+gUnknown_8003b1e:
+	.incbin "baserom.gba", 0x3b1e, 0x1a
+
+	.global gUnknown_8003b38
+gUnknown_8003b38:
+	.incbin "baserom.gba", 0x3b38, 0x18
 
 	.global gUnknown_8003b50
 gUnknown_8003b50:
