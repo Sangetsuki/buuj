@@ -385,7 +385,7 @@ sub_8000664: @ 0x08000664
 	ldr r2, _08000728 @ =0x04000080
 	adds r1, r4, #0
 	bl CpuSet
-	ldr r0, _0800072C @ =gUnknown_3007ffc
+	ldr r0, _0800072C @ =INTR_VECTOR
 	str r4, [r0]
 	mov r7, sp
 	adds r7, #2
@@ -467,7 +467,7 @@ _0800071C: .4byte 0x04000208
 _08000720: .4byte 0x080000FC
 _08000724: .4byte gUnknown_3000030
 _08000728: .4byte 0x04000080
-_0800072C: .4byte gUnknown_3007ffc
+_0800072C: .4byte INTR_VECTOR
 _08000730: .4byte gUnknown_3000a70
 _08000734: .4byte sub_8000AA0 + 1
 _08000738: .4byte 0x04000004

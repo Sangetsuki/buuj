@@ -556,7 +556,7 @@ _08000EE4:
 	ldr r2, _08000F54 @ =0x04000080
 	adds r1, r4, #0
 	bl CpuSet
-	ldr r0, _08000F58 @ =gUnknown_3007ffc
+	ldr r0, _08000F58 @ =INTR_VECTOR
 	str r4, [r0]
 	ldr r1, _08000F5C @ =gUnknown_3000a70
 	ldr r2, _08000F60 @ =sub_8000AA0 + 1
@@ -596,7 +596,7 @@ _08000F48: .4byte 0x04000208
 _08000F4C: .4byte 0x080000FC
 _08000F50: .4byte gUnknown_3000030
 _08000F54: .4byte 0x04000080
-_08000F58: .4byte gUnknown_3007ffc
+_08000F58: .4byte INTR_VECTOR
 _08000F5C: .4byte gUnknown_3000a70
 _08000F60: .4byte sub_8000AA0 + 1
 _08000F64: .4byte 0x04000004
@@ -916,7 +916,7 @@ _080011F6:
 	ldr r2, _08001254 @ =0x04000080
 	adds r1, r4, #0
 	bl CpuSet
-	ldr r0, _08001258 @ =gUnknown_3007ffc
+	ldr r0, _08001258 @ =INTR_VECTOR
 	str r4, [r0]
 	ldr r1, _0800125C @ =gUnknown_3000a70
 	ldr r2, _08001260 @ =0x08000AA1
@@ -952,7 +952,7 @@ _08001248: .4byte 0x04000208
 _0800124C: .4byte 0x080000FC
 _08001250: .4byte gUnknown_3000030
 _08001254: .4byte 0x04000080
-_08001258: .4byte gUnknown_3007ffc
+_08001258: .4byte INTR_VECTOR
 _0800125C: .4byte gUnknown_3000a70
 _08001260: .4byte sub_8000AA0 + 1
 _08001264: .4byte 0x04000004

@@ -21,4 +21,3 @@
 . = 0x7f00; gUnknown_3007f00 = .;
 . = 0x7fa0; gUnknown_3007fa0 = .;
 . = 0x7ffa; gUnknown_3007ffa = .;
-. = 0x7ffc; gUnknown_3007ffc = .;
