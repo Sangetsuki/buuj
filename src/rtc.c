@@ -9,6 +9,7 @@ static u16 sImeBak;
 static struct SiiRtcInfo sRtcInfoWork;
 
 void rtc_get_status_and_datetime(struct SiiRtcInfo *);
+u16 sub_80016DC(struct SiiRtcInfo * info);
 
 const struct SiiRtcInfo sDefaultRTC = {
     .year = 0, // 2000
@@ -56,58 +57,29 @@ s32 bcd_to_hex(u8 a0)
     return ((a0 >> 4) & 0xF) * 10 + (a0 & 0xF);
 }
 
-// I dont even know if this is right
-NAKED
 void sub_80015DC(void)
 {
-    asm_unified("\
-    push {r4, r5, lr}\n\
-	ldr r5, _08001608 @ =sRtcProbeStatus\n\
-	movs r0, #0\n\
-	strh r0, [r5]\n\
-	bl rtc_intr_disable\n\
-	bl SiiRtcUnprotect\n\
-	bl SiiRtcProbe\n\
-	ldr r4, _0800160C @ =0x03000254\n\
-	strb r0, [r4]\n\
-	bl rtc_intr_enable\n\
-	ldrb r4, [r4]\n\
-	movs r0, #0xf\n\
-	ands r0, r4\n\
-	cmp r0, #1\n\
-	beq _08001610\n\
-	movs r0, #1\n\
-	b _08001632\n\
-	.align 2, 0\n\
-_08001608: .4byte sRtcProbeStatus\n\
-_0800160C: .4byte 0x03000254\n\
-_08001610:\n\
-	movs r0, #0xf0\n\
-	ands r0, r4\n\
-	cmp r0, #0\n\
-	beq _0800161A\n\
-	movs r0, #2\n\
-_0800161A:\n\
-	strh r0, [r5]\n\
-	ldr r4, _0800163C @ =0x03000248\n\
-	adds r0, r4, #0\n\
-	bl rtc_get_status_and_datetime\n\
-	ldr r5, _08001640 @ =sRtcProbeStatus\n\
-	ldrh r0, [r5]\n\
-	cmp r0, #0\n\
-	bne _08001634\n\
-	adds r0, r4, #0\n\
-	bl sub_80016DC\n\
-_08001632:\n\
-	strh r0, [r5]\n\
-_08001634:\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0800163C: .4byte 0x03000248\n\
-_08001640: .4byte sRtcProbeStatus\n\
-    ");
+	sRtcProbeStatus = 0;
+	rtc_intr_disable();
+	SiiRtcUnprotect();
+	sRtcProbeCode = SiiRtcProbe();
+	rtc_intr_enable();
+	if ((sRtcProbeCode & 0xF) != 1)
+	{
+		sRtcProbeStatus = 1;
+	}
+	else
+	{
+	    if (sRtcProbeCode & 0xF0)
+	        sRtcProbeStatus = 2;
+	    else
+	        sRtcProbeStatus = 0;	
+	    rtc_get_status_and_datetime(&sRtcInfoBuffer);
+	    if (sRtcProbeStatus == 0)
+	    {
+	        sRtcProbeStatus = sub_80016DC(&sRtcInfoBuffer);
+	    }
+	}
 }
 
 u16 rtc_get_probe_status(void)
@@ -151,7 +123,7 @@ void rtc_set_status(struct SiiRtcInfo * info)
 }
 
 NAKED
-int sub_80016DC(void)
+u16 sub_80016DC(struct SiiRtcInfo * info)
 {
     asm_unified("\
     push {r4, r5, r6, lr}\n\
