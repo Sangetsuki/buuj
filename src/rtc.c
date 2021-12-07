@@ -58,7 +58,7 @@ s32 bcd_to_hex(u8 a0)
 
 // I dont even know if this is right
 NAKED
-void rtc_probe_status(void)
+void sub_80015DC(void)
 {
     asm_unified("\
     push {r4, r5, lr}\n\

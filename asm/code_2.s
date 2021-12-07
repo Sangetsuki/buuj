@@ -782,7 +782,7 @@ _080010C0:
 AgbMain: @ 0x080010CC
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
-	bl rtc_probe_status
+	bl sub_80015DC
 	bl sub_8000664
 	bl sub_8000770
 	ldr r0, _08001194 @ =gUnknown_3000234
