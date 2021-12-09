@@ -1,6 +1,5 @@
 #include "gba/gba.h"
 #include "siirtc.h"
-#include "naked.h"
 
 static u16 sRtcProbeStatus;
 static struct SiiRtcInfo sRtcInfoBuffer;
@@ -9,7 +8,7 @@ static u16 sImeBak;
 static struct SiiRtcInfo sRtcInfoWork;
 
 void rtc_get_status_and_datetime(struct SiiRtcInfo *);
-u16 sub_80016DC(struct SiiRtcInfo * info);
+u16 rtc_validate_datetime(struct SiiRtcInfo * info);
 
 const struct SiiRtcInfo sDefaultRTC = {
     .year = 0, // 2000
@@ -57,7 +56,7 @@ s32 bcd_to_hex(u8 a0)
     return ((a0 >> 4) & 0xF) * 10 + (a0 & 0xF);
 }
 
-void sub_80015DC(void)
+void rtc_probe_status(void)
 {
 	sRtcProbeStatus = 0;
 	rtc_intr_disable();
@@ -77,7 +76,7 @@ void sub_80015DC(void)
 	    rtc_get_status_and_datetime(&sRtcInfoBuffer);
 	    if (sRtcProbeStatus == 0)
 	    {
-	        sRtcProbeStatus = sub_80016DC(&sRtcInfoBuffer);
+	        sRtcProbeStatus = rtc_validate_datetime(&sRtcInfoBuffer);
 	    }
 	}
 }
@@ -122,130 +121,41 @@ void rtc_set_status(struct SiiRtcInfo * info)
     rtc_intr_enable();
 }
 
-NAKED
-u16 sub_80016DC(struct SiiRtcInfo * info)
+u16 rtc_validate_datetime(struct SiiRtcInfo * info)
 {
-    asm_unified("\
-    push {r4, r5, r6, lr}\n\
-	adds r6, r0, #0\n\
-	ldrb r1, [r6, #7]\n\
-	movs r0, #0x80\n\
-	ands r0, r1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	rsbs r0, r0, #0\n\
-	asrs r4, r0, #0x1f\n\
-	movs r0, #0x20\n\
-	ands r4, r0\n\
-	movs r0, #0x40\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	bne _080016FE\n\
-	movs r0, #0x10\n\
-	orrs r4, r0\n\
-_080016FE:\n\
-	ldrb r0, [r6]\n\
-	bl bcd_to_hex\n\
-	cmp r0, #0xff\n\
-	bne _08001710\n\
-	movs r0, #0x40\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_08001710:\n\
-	ldrb r0, [r6, #1]\n\
-	bl bcd_to_hex\n\
-	adds r5, r0, #0\n\
-	cmp r5, #0xff\n\
-	beq _08001724\n\
-	cmp r5, #0\n\
-	beq _08001724\n\
-	cmp r5, #0xc\n\
-	ble _0800172C\n\
-_08001724:\n\
-	movs r0, #0x80\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_0800172C:\n\
-	ldrb r0, [r6, #2]\n\
-	bl bcd_to_hex\n\
-	adds r2, r0, #0\n\
-	cmp r2, #0xff\n\
-	bne _08001744\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #1\n\
-	adds r0, r1, #0\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_08001744:\n\
-	cmp r5, #2\n\
-	bne _08001754\n\
-	ldr r0, _08001750 @ =sDaysPerMonth\n\
-	ldr r0, [r0, #4]\n\
-	adds r0, #1\n\
-	b _0800175E\n\
-	.align 2, 0\n\
-_08001750: .4byte sDaysPerMonth\n\
-_08001754:\n\
-	ldr r0, _080017C0 @ =sDaysPerMonth\n\
-	subs r1, r5, #1\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r0, [r1]\n\
-_0800175E:\n\
-	cmp r2, r0\n\
-	ble _0800176E\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #1\n\
-	adds r0, r1, #0\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_0800176E:\n\
-	ldrb r0, [r6, #4]\n\
-	bl bcd_to_hex\n\
-	adds r2, r0, #0\n\
-	cmp r2, #0x18\n\
-	ble _08001786\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #2\n\
-	adds r0, r1, #0\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_08001786:\n\
-	ldrb r0, [r6, #5]\n\
-	bl bcd_to_hex\n\
-	adds r2, r0, #0\n\
-	cmp r2, #0x3c\n\
-	ble _0800179E\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #3\n\
-	adds r0, r1, #0\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_0800179E:\n\
-	ldrb r0, [r6, #6]\n\
-	bl bcd_to_hex\n\
-	adds r2, r0, #0\n\
-	cmp r2, #0x3c\n\
-	ble _080017B6\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #4\n\
-	adds r0, r1, #0\n\
-	orrs r4, r0\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r4, r0, #0x10\n\
-_080017B6:\n\
-	adds r0, r4, #0\n\
-	pop {r4, r5, r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080017C0: .4byte sDaysPerMonth");
+    s32 year, month, day;
+    u16 r4 = (info->status & SIIRTCINFO_POWER) ? 0x20 : 0;
+    if (!(info->status & SIIRTCINFO_24HOUR))
+        r4 |= 0x10;
+    year = bcd_to_hex(info->year);
+    if (year == 0xFF)
+        r4 |= 0x40;
+    month = bcd_to_hex(info->month);
+    if (month == 0xFF || month == 0 || month > 12)
+        r4 |= 0x80;
+    day = bcd_to_hex(info->day);
+    if (day == 0xFF)
+        r4 |= 0x100;
+    if (month == MONTH_FEB)
+    {
+        if (day > sDaysPerMonth[1] + 1)
+            r4 |= 0x100;
+    }
+    else
+    {
+        if (day > sDaysPerMonth[month - 1])
+            r4 |= 0x100;
+    }
+    day = bcd_to_hex(info->hour);
+    if (day > 24)
+        r4 |= 0x200;
+    day = bcd_to_hex(info->minute);
+    if (day > 60)
+        r4 |= 0x400;
+    day = bcd_to_hex(info->second);
+    if (day > 60)
+        r4 |= 0x800;
+    return r4;
 }
 
 void rtc_reset()
