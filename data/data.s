@@ -6,15 +6,15 @@ gUnknown_80032f0:
 
 	.global gUnknown_8003310
 gUnknown_8003310:
-	.incbin "baserom.gba", 0x3310, 0x14
+	.ascii "NOW RESETTING......\0"
 
 	.global gUnknown_8003324
 gUnknown_8003324:
-	.incbin "baserom.gba", 0x3324, 0x14
+	.ascii "NOW WRITING......\0\0\0"
 
 	.global gUnknown_8003338
 gUnknown_8003338:
-	.incbin "baserom.gba", 0x3338, 0xc
+	.ascii "COMPLETE.\0\0\0"
 
 	.global gUnknown_8003344
 gUnknown_8003344:

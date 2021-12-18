@@ -6,7 +6,28 @@ gUnknown_8004070:
 
 	.global gUnknown_8004270
 gUnknown_8004270:
-	.incbin "baserom.gba", 0x4270, 0x1C94
+	.incbin "baserom.gba", 0x4270, 0x1c00
+
+gUnknown_8005e70:
+	.string "LUGIA$"
+gUnknown_8005e7c:
+	.string "HO-OH$"
+gUnknown_8005e88:
+	.string "ENTEI$"
+gUnknown_8005e94:
+	.string "LATIOS$"
+gUnknown_8005ea2:
+	.string "LATIAS$"
+gUnknown_8005eb0:
+	.string "CHARIZARD$"
+gUnknown_8005ec4:
+	.string "ARTICUNO$"
+gUnknown_8005ed6:
+	.string "RAIKOU$"
+gUnknown_8005ee4:
+	.string "SUICUNE$"
+gUnknown_8005ef4:
+	.string "PIKACHU$"
 
 	.global MultiSio
 MultiSio:
@@ -18,7 +39,18 @@ siirtc_data:
 
 	.global gUnknown_8005f20
 gUnknown_8005f20:
-	.incbin "baserom.gba", 0x5f20, 0x12C
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x03000A62 @ sLocked
+	.4byte 0x080000C6 @ GPIO_PORT_DIRECTION
+	.space 0x100
 
 	.global gUnknown_800604c
 gUnknown_800604c:
@@ -52,45 +84,13 @@ gUnknown_800609c:
 
 	.global gUnknown_8008a74
 gUnknown_8008a74:
-	.incbin "baserom.gba", 0x8a74, 0x28
-
-	.global gbaRom1
-gbaRom1:
-	.incbin "baserom.gba", 0x8a9c, 0x7d40
-	
-	.global gbaRom2
-gbaRom2:
-	.incbin "baserom.gba", 0x107dc,  0x7f28
-
-	.global gbaRom3
-gbaRom3:
-	.incbin "baserom.gba", 0x18704, 0x7ed4
-
-	.global gbaRom4
-gbaRom4:
-	.incbin "baserom.gba", 0x205d8, 0x7d44
-
-	.global gbaRom5
-gbaRom5:
-	.incbin "baserom.gba", 0x2831C, 0x7d18
-
-	.global gbaRom6
-gbaRom6:
-	.incbin "baserom.gba", 0x30034, 0x7e40
-
-	.global gbaRom7
-gbaRom7:
-	.incbin "baserom.gba", 0x37e74, 0x7df0
-
-	.global gbaRom8
-gbaRom8:
-	.incbin "baserom.gba", 0x3fc64, 0x7e60
-
-	.global gbaRom9
-gbaRom9:
-	.incbin "baserom.gba", 0x47ac4, 0x7e6c
-
-	.global gbaRom10
-gbaRom10:
-	.incbin "baserom.gba", 0x4f930, 0x7bc4
-gbaRom10End:
+	.4byte gUnknown_8005e70
+	.4byte gUnknown_8005e7c
+	.4byte gUnknown_8005e88
+	.4byte gUnknown_8005e94
+	.4byte gUnknown_8005ea2
+	.4byte gUnknown_8005eb0
+	.4byte gUnknown_8005ec4
+	.4byte gUnknown_8005ed6
+	.4byte gUnknown_8005ee4
+	.4byte gUnknown_8005ef4

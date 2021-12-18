@@ -59,6 +59,7 @@ SECTIONS
         src/rtc.o(.rodata);
         src/strings1.o(.rodata);
         data/data2.o(.rodata);
+        data/roms.o(.rodata);
 	} = 0
 
     /* Discard everything not specifically mentioned above. */

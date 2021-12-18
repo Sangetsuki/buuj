@@ -98,10 +98,10 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	$(AS) $(ASFLAGS) $(C_BUILDDIR)/$*.s -o $@ 
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) $< -o $@
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s graphics
-	$(AS) $(ASFLAGS) $< -o $@
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 clean: clean-tools
 	rm -f $(ROM) $(ELF) $(MAP) 
