@@ -25,3 +25,27 @@ const u8 gUnknown_8003b1e[] = __("Backup Error$");
 const u8 gUnknown_8003b38[] = __("Out of date$");
 const u8 gUnknown_8003b50[] = __("POKéMON Deliver$");
 const u8 gUnknown_8003b70[] = __("$$EDIT$MODE$");
+
+// From this part onwards nothing is sure, as there are no code refenreces
+const u8 empty1[0x6E] = {0};
+
+const u8 gUnknown_8003bf6[] = __("CURRENT$TIME$");
+
+const u8 empty2[0x30] = {0};
+
+const u8 gUnknown_8003c40[] = __("/$$/$$$$$:$$:$");
+
+const u8 empty3[0xD8] = {0};
+
+const u8 gUnknown_8003d34[] = __("1:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+const u8 gUnknown_8003d74[] = __("2:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+const u8 gUnknown_8003db4[] = __("3:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+const u8 gUnknown_8003df4[] = __("4:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+const u8 gUnknown_8003e34[] = __("5:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+const u8 gUnknown_8003e74[] = __("6:$$$$/$$/$$$-$$$$$/$$/$$$$$$$$$");
+
+const u8 empty4[0x150] = {0};
+
+const u8 gUnknown_8004004[] = __("START:SAVE$$");
+const u8 gUnknown_800401c[] = __("B:CANCEL$$$$$$$");
+const u8 gUnknown_800403a[] = __("A+R+SELECT:RESET$TO$DEFAULT");
