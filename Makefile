@@ -65,6 +65,7 @@ LIB := $(LIBPATH) -lgcc -lc -L../libagbsyscall -lagbsyscall
 
 GFX  := tools/gbagfx/gbagfx$(EXE)
 FIX  := tools/gbafix/gbafix$(EXE)
+PREPROC := tools/preproc/preproc$(EXE)
 
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
@@ -92,7 +93,7 @@ $(C_BUILDDIR)/siirtc.o: $(C_SUBDIR)/siirtc.c
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	$(CC1) $(CFLAGS) $(C_BUILDDIR)/$*.i -o $(C_BUILDDIR)/$*.s
+	$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	echo ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) $(C_BUILDDIR)/$*.s -o $@ 
 
@@ -116,5 +117,12 @@ compare: all
 
 libagbsyscall/libagbsyscall.a:
 	$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN)
+
+SYMTAB := $(BUILD_NAME)_syms.dump
+
+symtab: $(SYMTAB)
+
+$(SYMTAB): $(ELF)
+	$(DEVKITARM)/bin/arm-none-eabi-nm $< | uniq > $@
 
 .PHONY: compare all clean clean-tools tools
