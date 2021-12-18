@@ -22,11 +22,29 @@ gUnknown_8005f20:
 
 	.global gUnknown_800604c
 gUnknown_800604c:
-	.incbin "baserom.gba", 0x604c, 0x28
+	.4byte gbaRom1
+	.4byte gbaRom2
+	.4byte gbaRom3
+	.4byte gbaRom4
+	.4byte gbaRom5
+	.4byte gbaRom6
+	.4byte gbaRom7
+	.4byte gbaRom8
+	.4byte gbaRom9
+	.4byte gbaRom10
 
 	.global gUnknown_8006074
 gUnknown_8006074:
-	.incbin "baserom.gba", 0x6074, 0x28
+	.4byte gbaRom2
+	.4byte gbaRom3
+	.4byte gbaRom4
+	.4byte gbaRom5
+	.4byte gbaRom6
+	.4byte gbaRom7
+	.4byte gbaRom8
+	.4byte gbaRom9
+	.4byte gbaRom10
+	.4byte gbaRom10End
 
 	.global gUnknown_800609c
 gUnknown_800609c:
@@ -75,3 +93,4 @@ gbaRom9:
 	.global gbaRom10
 gbaRom10:
 	.incbin "baserom.gba", 0x4f930, 0x7bc4
+gbaRom10End:
