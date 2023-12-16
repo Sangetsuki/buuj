@@ -9,6 +9,10 @@ SECTIONS
     ALIGN(4)
     {
         asm/code.o(.text);
+        asm/multiboot.o(.text);
+        asm/code_2.o(.text);
+        asm/libagbsyscall.o(.text);
+        asm/code_3.o(.text);
         data/data.o(.rodata);
     } = 0
 
