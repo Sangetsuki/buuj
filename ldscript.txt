@@ -8,7 +8,9 @@ SECTIONS
     .text :
     ALIGN(4)
     {
+        asm/crt0.o(.text);
         asm/code.o(.text);
+        src/code.o(.text);
         asm/multiboot.o(.text);
         asm/code_2.o(.text);
         asm/libagbsyscall.o(.text);
