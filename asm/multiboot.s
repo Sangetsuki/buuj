@@ -1,45 +1,15 @@
 	.include "asm/macros.inc"
   .syntax unified
 
-  thumb_func_start sub_08001C88
-sub_08001C88: @ 0x08001C88 MultiBootInit
-	adds r2, r0, #0
-	movs r1, #0
-	strb r1, [r2, #0x1e]
-	strb r1, [r2, #0x18]
-	strb r1, [r2, #0x1d]
-	adds r3, r2, #0
-	adds r3, #0x4a
-	movs r0, #0xf
-	strb r0, [r3]
-	adds r0, r2, #0
-	adds r0, #0x48
-	strb r1, [r0]
-	strh r1, [r2, #0x16]
-	ldr r0, _08001CB4 @ =0x04000134
-	strh r1, [r0]
-	ldr r2, _08001CB8 @ =0x04000128
-	ldr r3, _08001CBC @ =0x00002003
-	adds r0, r3, #0
-	strh r0, [r2]
-	ldr r0, _08001CC0 @ =0x0400012A
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_08001CB4: .4byte 0x04000134
-_08001CB8: .4byte 0x04000128
-_08001CBC: .4byte 0x00002003
-_08001CC0: .4byte 0x0400012A
-
-	thumb_func_start sub_08001CC4
-sub_08001CC4: @ 0x08001CC4
+	thumb_func_start MultiBootMain
+MultiBootMain: @ 0x08001CC4
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
 	adds r7, r0, #0
-	bl sub_080021E8
+	bl MultiBootCheckComplete
 	cmp r0, #0
 	beq _08001CDA
 	b _080020A2
@@ -69,7 +39,7 @@ _08001CEE:
 	cmp r5, #8
 	beq _08001D18
 	adds r0, r7, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #8
 	eors r0, r5
 	b _080020A4
@@ -80,7 +50,7 @@ _08001D18:
 	cmp r0, #0xdf
 	bls _08001D6A
 	adds r0, r7, #0
-	bl sub_080021FC
+	bl MultiBootHandShake
 	adds r5, r0, #0
 	cmp r5, #0
 	beq _08001D2C
@@ -95,13 +65,13 @@ _08001D2C:
 	cmp r0, #0xe1
 	bls _08001D48
 	adds r0, r7, #0
-	bl sub_080021E8
+	bl MultiBootCheckComplete
 	cmp r0, #0
 	bne _08001D48
 	b _08002092
 _08001D48:
 	adds r0, r7, #0
-	bl sub_080021E8
+	bl MultiBootCheckComplete
 	cmp r0, #0
 	beq _08001D54
 	b _080020A2
@@ -110,7 +80,7 @@ _08001D54:
 	cmp r0, #0
 	bne _08001D64
 	adds r0, r7, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #0x71
 	b _080020A4
 _08001D64:
@@ -225,7 +195,7 @@ _08001E20:
 	cmp r0, r2
 	beq _08001E42
 	adds r0, r7, #0
-	bl sub_08002100
+	bl MultiBootStartProbe
 	b _08001E4A
 	.align 2, 0
 _08001E38: .4byte 0x04000120
@@ -377,7 +347,7 @@ _08001F4A:
 	adds r0, r2, #0
 	orrs r1, r0
 	adds r0, r7, #0
-	bl sub_080020B4
+	bl MultiBootSend
 	b _080020A4
 	.align 2, 0
 _08001F58: .4byte 0x03000A58
@@ -404,7 +374,7 @@ _08001F6A:
 	orrs r3, r0
 	adds r0, r7, #0
 	adds r1, r3, #0
-	bl sub_080020B4
+	bl MultiBootSend
 	b _080020A4
 _08001F8E:
 	movs r5, #3
@@ -442,7 +412,7 @@ _08001FAC:
 _08001FCC: .4byte 0x04000126
 _08001FD0:
 	adds r0, r7, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #0x1e
 	mov r1, sl
 	strb r0, [r1]
@@ -509,7 +479,7 @@ _08002048:
 	cmp r0, #0
 	bne _0800205A
 	adds r0, r7, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #0x50
 	b _080020A4
 _0800205A:
@@ -532,7 +502,7 @@ _0800206A:
 	ldrb r1, [r0]
 	orrs r1, r2
 	adds r0, r7, #0
-	bl sub_080020B4
+	bl MultiBootSend
 	adds r5, r0, #0
 	cmp r5, #0
 	bne _080020A4
@@ -542,11 +512,11 @@ _0800206A:
 	cmp r0, #1
 	bne _080020A2
 _08002092:
-	bl sub_08002300
+	bl MultiBootWaitSendDone
 	b _08001CEE
 _08002098:
 	adds r0, r7, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #0x60
 	b _080020A4
 _080020A2:
@@ -561,8 +531,8 @@ _080020A4:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_080020B4
-sub_080020B4: @ 0x080020B4
+	thumb_func_start MultiBootSend
+MultiBootSend: @ 0x080020B4
 	push {r4, lr}
 	adds r2, r0, #0
 	lsls r1, r1, #0x10
@@ -590,7 +560,7 @@ _080020E4: .4byte 0x0400012A
 _080020E8: .4byte 0x00002083
 _080020EC:
 	adds r0, r2, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #8
 	eors r4, r0
 	adds r0, r4, #0
@@ -600,15 +570,15 @@ _080020F8:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_08002100
-sub_08002100: @ 0x08002100
+	thumb_func_start MultiBootStartProbe
+MultiBootStartProbe: @ 0x08002100
 	push {lr}
 	adds r1, r0, #0
 	ldrb r0, [r1, #0x18]
 	cmp r0, #0
 	beq _08002112
 	adds r0, r1, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	b _0800211E
 _08002112:
 	adds r2, r1, #0
@@ -622,8 +592,8 @@ _0800211E:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_08002124
-sub_08002124: @ 0x08002124
+	thumb_func_start MultiBootStartMaster
+MultiBootStartMaster: @ 0x08002124
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0
@@ -655,7 +625,7 @@ sub_08002124: @ 0x08002124
 	bls _0800216C
 _0800215E:
 	adds r0, r5, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	b _080021E0
 	.align 2, 0
 _08002168: .4byte 0x0003FF00
@@ -720,8 +690,8 @@ _080021E0:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_080021E8
-sub_080021E8: @ 0x080021E8
+	thumb_func_start MultiBootCheckComplete
+MultiBootCheckComplete: @ 0x080021E8
 	push {lr}
 	ldrb r0, [r0, #0x18]
 	cmp r0, #0xe9
@@ -735,8 +705,8 @@ _080021F6:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_080021FC
-sub_080021FC: @ 0x080021FC
+	thumb_func_start MultiBootHandShake
+MultiBootHandShake: @ 0x080021FC
 	push {r4, r5, r6, lr}
 	adds r3, r0, #0
 	ldrb r0, [r3, #0x18]
@@ -808,7 +778,7 @@ _08002278:
 	ldrh r1, [r3]
 _0800227A:
 	adds r0, r3, #0
-	bl sub_080020B4
+	bl MultiBootSend
 	b _080022E0
 	.align 2, 0
 _08002284: .4byte 0x04000126
@@ -853,7 +823,7 @@ _080022A4:
 _080022D0: .4byte 0x04000120
 _080022D4:
 	adds r0, r3, #0
-	bl sub_08001C88
+	bl MultiBootInit
 	movs r0, #0x71
 	b _080022E0
 _080022DE:
@@ -864,24 +834,24 @@ _080022E0:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_080022E8
-sub_080022E8: @ 0x080022E8
+	thumb_func_start MultiBootWaitCycles
+MultiBootWaitCycles: @ 0x080022E8
 	mov r2, pc
 	lsrs r2, r2, #0x18
 	movs r1, #0xc
 	cmp r2, #2
-	beq _080022FA
+	beq MultiBootWaitCyclesLoop
 	movs r1, #0xd
 	cmp r2, #8
-	beq _080022FA
+	beq MultiBootWaitCyclesLoop
 	movs r1, #4
-_080022FA:
+MultiBootWaitCyclesLoop:
 	subs r0, r0, r1
-	bgt _080022FA
+	bgt MultiBootWaitCyclesLoop
 	bx lr
 
-	thumb_func_start sub_08002300
-sub_08002300: @ 0x08002300 MultiBootWaitSendDone
+	thumb_func_start MultiBootWaitSendDone
+MultiBootWaitSendDone: @ 0x08002300
 	push {r4, r5, lr}
 	movs r2, #0
 	ldr r3, _08002334 @ =0x04000128
@@ -904,7 +874,7 @@ _08002314:
 _08002324:
 	movs r0, #0x96
 	lsls r0, r0, #2
-	bl sub_080022E8
+	bl MultiBootWaitCycles
 	pop {r4, r5}
 	pop {r0}
 	bx r0

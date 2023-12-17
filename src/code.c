@@ -1,5 +1,4 @@
-#include "gba/defines.h"
-#include "gba/types.h"
+#include "gba/gba.h"
 
 void sub_08000334(void){};
 

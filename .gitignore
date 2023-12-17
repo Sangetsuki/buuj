@@ -17,3 +17,4 @@ tools/agbcc
 build/
 *.dump
 compile_flags.txt
+.clang-format
