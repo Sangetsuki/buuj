@@ -4,10 +4,11 @@ SECTIONS
 {
     . = 0x02000000;
     . = 0x03000000;
+    . = 0x03000A58;
     .bss :
     ALIGN(4)
     {
-        src/multiboot.o(.bss); /* idk where to put this */
+        src/multiboot.o(.bss);
     }
 
     . = 0x08000000;

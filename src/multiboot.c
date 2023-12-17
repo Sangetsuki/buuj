@@ -269,7 +269,7 @@ void MultiBootStartProbe(struct MultiBootParam* mp) {
 
 void MultiBootStartMaster(struct MultiBootParam* mp, const u8* srcp, int length,
                           u8 palette_color, s8 palette_speed) {
-  int i = 0;
+  int i;
 
   if (mp->probe_count != 0 || mp->client_bit == 0 || mp->check_wait != 0) {
     MultiBootInit(mp);
