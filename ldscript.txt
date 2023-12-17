@@ -4,6 +4,11 @@ SECTIONS
 {
     . = 0x02000000;
     . = 0x03000000;
+    .bss :
+    ALIGN(4)
+    {
+        src/multiboot.o(.bss); /* idk where to put this */
+    }
 
     . = 0x08000000;
     .text :
@@ -13,7 +18,6 @@ SECTIONS
         src/code.o(.text);
         asm/code.o(.text);
         src/multiboot.o(.text);
-        src/multiboot.o(.bss);
         asm/code_2.o(.text);
         asm/libagbsyscall.o(.text);
         asm/code_3.o(.text);
