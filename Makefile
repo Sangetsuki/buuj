@@ -59,9 +59,11 @@ ALL_OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 SUBDIRS := $(sort $(dir $(ALL_OBJS)))
 
 LIBPATH := -L "../tools/agbcc/lib"
-LIB := $(LIBPATH) -lgcc
+LIB := $(LIBPATH) -lgcc -L../libagbsyscall -lagbsyscall
 
 GFX := tools/gbagfx/gbagfx$(EXE)
+
+.PHONY: libagbsyscall
 
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
@@ -69,7 +71,7 @@ $(shell mkdir -p $(SUBDIRS))
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
-$(ELF): $(ALL_OBJS) $(LDSCRIPT)
+$(ELF): $(ALL_OBJS) $(LDSCRIPT) libagbsyscall
 	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) $(LIB) -o ../$@
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
@@ -90,17 +92,15 @@ clean:
 	rm -f $(ROM) $(ELF) $(MAP) 
 	rm -r $(BUILD_DIR)/
 	find . \( -iname '*.4bpp' -o -iname '*.gbapal' \) -exec rm {} +
+	@$(MAKE) clean -C libagbsyscall
 
 compare: $(ROM)
 	sha1sum -c $(BUILD_NAME).sha1
+
+libagbsyscall:
+	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
 %.png: ;
 %.4bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
 
-###################
-### Symbol file ###
-###################
-
-$(SYM): $(ELF)
-	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

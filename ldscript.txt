@@ -19,7 +19,12 @@ SECTIONS
         asm/code.o(.text);
         src/multiboot.o(.text);
         asm/code_2.o(.text);
-        asm/libagbsyscall.o(.text);
+        *libagbsyscall.a:CpuSet.o(.text);
+        *libagbsyscall.a:Div.o(.text);
+        *libagbsyscall.a:Mod.o(.text);
+        *libagbsyscall.a:MultiBoot.o(.text);
+        *libagbsyscall.a:SoftResetRom.o(.text);
+        *libagbsyscall.a:VBlankIntrWait.o(.text);
         asm/code_3.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         asm/libgcc.o(.text);
