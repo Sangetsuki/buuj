@@ -13,7 +13,7 @@ SECTIONS
         src/code.o(.text);
         asm/code.o(.text);
         src/multiboot.o(.text);
-        asm/multiboot.o(.text);
+        src/multiboot.o(.bss);
         asm/code_2.o(.text);
         asm/libagbsyscall.o(.text);
         asm/code_3.o(.text);
