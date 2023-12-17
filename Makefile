@@ -58,6 +58,10 @@ ALL_OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
 SUBDIRS := $(sort $(dir $(ALL_OBJS)))
 
+LIBPATH := -L "../tools/agbcc/lib"
+LIB := $(LIBPATH) -lgcc
+
+GFX := tools/gbagfx/gbagfx$(EXE)
 
 #### Recipes ####
 $(shell mkdir -p $(SUBDIRS))
@@ -66,7 +70,7 @@ $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
 $(ELF): $(ALL_OBJS) $(LDSCRIPT)
-	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) -o ../$@
+	cd $(BUILD_DIR) && $(LD) -T ../$(LDSCRIPT) -Map ../$(MAP) $(LIB) -o ../$@
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
@@ -77,12 +81,26 @@ $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
+$(DATA_ASM_BUILDDIR)/data.o: graphics/pokeball_1.4bpp graphics/pokeball_2.4bpp graphics/palette.gbapal
+
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
 clean:
 	rm -f $(ROM) $(ELF) $(MAP) 
 	rm -r $(BUILD_DIR)/
+	find . \( -iname '*.4bpp' -o -iname '*.gbapal' \) -exec rm {} +
 
 compare: $(ROM)
 	sha1sum -c $(BUILD_NAME).sha1
+
+%.png: ;
+%.4bpp: %.png  ; $(GFX) $< $@
+%.gbapal: %.pal ; $(GFX) $< $@
+
+###################
+### Symbol file ###
+###################
+
+$(SYM): $(ELF)
+	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

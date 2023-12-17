@@ -403,7 +403,7 @@ sub_08002650: @ 0x08002650
 	ldr r0, _08002700 @ =0x03001200
 	movs r4, #0
 	str r4, [sp]
-	bl sub_08003014
+	bl _call_via_r0
 	str r0, [sp, #4]
 	ldr r0, _08002704 @ =0x03001050
 	strb r4, [r0, #3]

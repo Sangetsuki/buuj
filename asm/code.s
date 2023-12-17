@@ -132,7 +132,7 @@ _08000482:
 _0800048C:
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _080004A8
@@ -152,18 +152,18 @@ _080004A8:
 _080004B2:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	strh r0, [r6]
 	adds r6, #2
 	adds r7, #1
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080030E8
+	bl _modsi3
 	adds r5, r0, #0
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r4, r0, #0
 	cmp r4, #0
 	bgt _080004B2
@@ -219,7 +219,7 @@ _08000528:
 _08000532:
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _08000554
@@ -246,9 +246,9 @@ _08000554:
 _08000566:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_08003050
+	bl _divsi3
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	strh r0, [r6]
 	adds r6, #2
@@ -256,11 +256,11 @@ _08000566:
 	add r8, r0
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080030E8
+	bl _modsi3
 	adds r5, r0, #0
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r4, r0, #0
 	adds r7, #1
 	cmp r4, #0
@@ -317,20 +317,20 @@ sub_080005D0: @ 0x080005D0
 _080005F2:
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_08003050
+	bl _divsi3
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	strh r0, [r6]
 	adds r6, #2
 	adds r7, #1
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_080030E8
+	bl _modsi3
 	adds r5, r0, #0
 	adds r0, r4, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r4, r0, #0
 	cmp r4, #0
 	bgt _080005F2
@@ -649,10 +649,10 @@ _080007B6:
 	ands r6, r1
 	strb r6, [r7, #9]
 	ldr r1, _080008F4 @ =0x05000200
-	ldr r0, _080008F8 @ =0x0800378C
+	ldr r0, _080008F8 @ =pokeball_pal
 	movs r2, #0x10
 	bl CpuSet
-	ldr r0, _080008FC @ =0x080037AC
+	ldr r0, _080008FC @ =pokeball_big
 	ldr r1, _08000900 @ =0x06014000
 	movs r2, #0xa0
 	lsls r2, r2, #1
@@ -677,8 +677,8 @@ _080008E8: .4byte 0x0800350C
 _080008EC: .4byte 0xFFFFFE00
 _080008F0: .4byte 0xFFFFFC00
 _080008F4: .4byte 0x05000200
-_080008F8: .4byte 0x0800378C
-_080008FC: .4byte 0x080037AC
+_080008F8: .4byte pokeball_pal
+_080008FC: .4byte pokeball_big
 _08000900: .4byte 0x06014000
 
 	thumb_func_start sub_08000904
@@ -2203,7 +2203,7 @@ _080014FA:
 	adds r4, #1
 	adds r0, r1, #0
 	movs r1, #0xa
-	bl sub_080031B8
+	bl _udivsi3
 	adds r1, r0, #0
 	cmp r1, #0
 	bne _080014FA
@@ -2236,7 +2236,7 @@ _08001530:
 _0800153C:
 	adds r0, r1, #0
 	movs r1, #0xa
-	bl sub_080031B8
+	bl _udivsi3
 	adds r1, r0, #0
 	subs r4, #1
 	cmp r4, #0
@@ -2244,7 +2244,7 @@ _0800153C:
 _0800154C:
 	adds r0, r1, #0
 	movs r1, #0xa
-	bl sub_08003230
+	bl _umodsi3
 	adds r1, r0, #0
 	adds r0, #0x30
 	lsls r0, r0, #0x10
@@ -2917,7 +2917,7 @@ sub_08001A30: @ 0x08001A30
 	add r4, r8
 	mov r0, sb
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -2926,7 +2926,7 @@ sub_08001A30: @ 0x08001A30
 	add r4, r8
 	mov r0, sb
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -2944,7 +2944,7 @@ sub_08001A30: @ 0x08001A30
 	add r4, r8
 	mov r0, sl
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -2953,7 +2953,7 @@ sub_08001A30: @ 0x08001A30
 	add r4, r8
 	mov r0, sl
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -2968,7 +2968,7 @@ sub_08001A30: @ 0x08001A30
 	add r4, r8
 	adds r0, r7, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -2977,7 +2977,7 @@ sub_08001A30: @ 0x08001A30
 	add r5, r8
 	adds r0, r7, #0
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r6, r0
 	strh r6, [r5]
@@ -3012,7 +3012,7 @@ sub_08001B10: @ 0x08001B10
 	lsls r6, r6, #0xc
 	mov r0, sb
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -3021,7 +3021,7 @@ sub_08001B10: @ 0x08001B10
 	add r4, r8
 	mov r0, sb
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -3039,7 +3039,7 @@ sub_08001B10: @ 0x08001B10
 	add r4, r8
 	mov r0, sl
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -3048,7 +3048,7 @@ sub_08001B10: @ 0x08001B10
 	add r4, r8
 	mov r0, sl
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -3062,7 +3062,7 @@ sub_08001B10: @ 0x08001B10
 	add r4, r8
 	adds r0, r7, #0
 	movs r1, #0xa
-	bl sub_08003050
+	bl _divsi3
 	adds r0, #0x30
 	orrs r0, r6
 	strh r0, [r4]
@@ -3071,7 +3071,7 @@ sub_08001B10: @ 0x08001B10
 	add r5, r8
 	adds r0, r7, #0
 	movs r1, #0xa
-	bl sub_080030E8
+	bl _modsi3
 	adds r0, #0x30
 	orrs r6, r0
 	strh r6, [r5]
